@@ -29,6 +29,11 @@ const routes = [
     name: 'manitto',
     component: () => import(/* webpackChunkName: "about" */ '../views/manitto.vue')
   },
+  {
+    path: '/kakao',
+    name: 'kakao',
+    component: () => import(/* webpackChunkName: "about" */ '../views/kakao.vue')
+  },
 
 ]
 
