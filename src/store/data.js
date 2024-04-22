@@ -1,44 +1,25 @@
-import { createdata } from 'vuex'
+import { createStore } from 'vuex'
 
 
-const data = createdata({
+const store = createStore({
     state: {
         studentList: []
     },
     mutations: {
-        addstu(state, obj) {
-            console.log(state);
+        info(state, obj) {
+            console.log(state.login_info);
             console.log('============');
             console.log(obj);
 
-            state.studentList.push(obj);
+            state.login_info.push(obj);
+
         },
-        removeStu(state, obj) {
-            for (let li = 0; li < state.studentList.length; li++) {
-                if (obj.name === state.studentList[li].name) {
-                    state.studentList.splice(li, 1);
-                    break;
-                }
-            }
-        },
-        modistu(state, obj) {
-            for (let li = 0; li < state.studentList.length; li++) {
-                if (obj.name === state.studentList[li].name) {
-                    state.studentList.splice(li, 1, {
-                        name: obj.name,
-                        kor: obj.kor,
-                        eng: obj.eng,
-                        mat: obj.mat
-                    });
-                }
-            }
-        }
     },
     getters: {
-        getstudentlist(state) {
-            return state.studentList;
-        }
+        getlogin_info(state) {
+            return state.login_info;
+        },
     }
 })
 
-export default data;
+export default store;
