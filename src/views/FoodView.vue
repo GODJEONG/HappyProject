@@ -1,56 +1,72 @@
 <template>
-  <h1 class="text-6xl my-12">오늘 뭐먹을까?</h1>
-  <!--지도띄우기-->
-  <div
-    class="my-8 border border solid 7px"
-    id="map"
-    style="width: 1200px; height: 500px; background: gray"
-  >
-    지도
-  </div>
+  <div class="app-container">
+    <h1 class="text-6xl my-12">오늘 뭐먹을까?</h1>
+    <!--지도띄우기-->
+    <div
+      class="my-8 border border solid 7px"
+      id="map"
+      style="width: 1200px; height: 500px; background: gray"
+    >
+      지도
+    </div>
 
-  <div class="text-3xl my-7">식당리스트</div>
-
-  <div class="text-xl my-7">
-    <input type="checkbox" v-model="checkedTagList" value="해장" /><label
-      >해장</label
-    >&nbsp;
-    <input type="checkbox" v-model="checkedTagList" value="고기" /><label
-      >고기</label
-    >&nbsp;
-    <input type="checkbox" v-model="checkedTagList" value="분식" /><label
-      >분식</label
-    >&nbsp;
-    <input type="checkbox" v-model="checkedTagList" value="비건" /><label
-      >비건</label
-    >&nbsp;
-    <input type="checkbox" v-model="checkedTagList" value="간단" /><label
-      >간단</label
-    >&nbsp; <input type="checkbox" v-model="checkedTagList" value="면" /><label
-      >면</label
-    >&nbsp;
-  </div>
-
-  <ul class="grid grid-cols-3 gap-4">
-    <template v-for="restaurant in restaurantList" :key="restaurant.name">
-      <li
-        class="h-48 bg-slate-500 grid grid-cols-2"
-        v-if="restaurant.isVisible"
-      >
-        <div class="bg-slate-200">{{ restaurant.img }}</div>
-        <div>
-          <div>{{ restaurant.name }}</div>
-          <div>{{ restaurant.menu }}</div>
-          <div>{{ restaurant.description }}</div>
-          <button @click="like(restaurant.name)">좋아요</button>
-          <div>{{ restaurant.likeCount }}</div>
-          <div v-for="tag in restaurant.tag" :key="tag">
-            {{ tag }}
+    <div class="text-3xl my-7">오늘의 식당 추천</div>
+    <ul class="grid grid-cols-1 gap-4">
+      <template v-for="restaurant in restaurantList" :key="restaurant.name">
+        <li class="h-48 bg-slate-500 grid grid-cols-2">
+          <div class="bg-slate-200">{{ restaurant.img }}</div>
+          <div>
+            <div>{{ restaurant.name }}</div>
+            <div>{{ restaurant.menu }}</div>
           </div>
-        </div>
-      </li>
-    </template>
-  </ul>
+        </li>
+      </template>
+    </ul>
+
+    <div class="text-3xl my-7">식당리스트</div>
+
+    <div class="text-xl my-7">
+      <input type="checkbox" v-model="checkedTagList" value="해장" /><label
+        >해장</label
+      >&nbsp;
+      <input type="checkbox" v-model="checkedTagList" value="고기" /><label
+        >고기</label
+      >&nbsp;
+      <input type="checkbox" v-model="checkedTagList" value="분식" /><label
+        >분식</label
+      >&nbsp;
+      <input type="checkbox" v-model="checkedTagList" value="비건" /><label
+        >비건</label
+      >&nbsp;
+      <input type="checkbox" v-model="checkedTagList" value="간단" /><label
+        >간단</label
+      >&nbsp;
+      <input type="checkbox" v-model="checkedTagList" value="면" /><label
+        >면</label
+      >&nbsp;
+    </div>
+
+    <ul class="grid grid-cols-3 gap-4">
+      <template v-for="restaurant in restaurantList" :key="restaurant.name">
+        <li
+          class="h-48 bg-slate-500 grid grid-cols-2"
+          v-if="restaurant.isVisible"
+        >
+          <div class="bg-slate-200">{{ restaurant.img }}</div>
+          <div>
+            <div>{{ restaurant.name }}</div>
+            <div>{{ restaurant.menu }}</div>
+            <div>{{ restaurant.description }}</div>
+            <button @click="like(restaurant.name)">좋아요</button>
+            <div>{{ restaurant.likeCount }}</div>
+            <div v-for="tag in restaurant.tag" :key="tag">
+              {{ tag }}
+            </div>
+          </div>
+        </li>
+      </template>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -111,7 +127,7 @@ export default {
           description: "식당설명",
           menu: "메뉴1,메뉴2,메뉴3",
           img: "DB에서 불러온 사진.jpg",
-          likeCount: 3,
+          likeCount: 0,
           tag: ["해장", "고기"],
           isLike: false,
           isVisible: true,
@@ -123,7 +139,7 @@ export default {
           description: "식당설명",
           menu: "메뉴1,메뉴2,메뉴3",
           img: "DB에서 불러온 사진.jpg",
-          likeCount: 3,
+          likeCount: 0,
           tag: ["분식", "해장"],
           isLike: false,
           isVisible: true,
@@ -133,7 +149,7 @@ export default {
           description: "식당설명",
           menu: "메뉴1,메뉴2,메뉴3",
           img: "DB에서 불러온 사진.jpg",
-          likeCount: 3,
+          likeCount: 0,
           tag: ["간단", "비건"],
           isLike: false,
           isVisible: true,
@@ -186,5 +202,9 @@ export default {
 
 #map {
   margin: 0 auto; /*중앙정렬*/
+}
+
+.app-container {
+  background-image: url("@/assets/cute-food-illustration-character_553316-15.jpg");
 }
 </style>

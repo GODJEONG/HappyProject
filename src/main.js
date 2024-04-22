@@ -6,7 +6,7 @@ import './styles.css';
 
 
 
-createApp(App).use(router).mount('#app')
+// createApp(App).use(router).mount('#app')
 createApp(App)
 .use(router)
 .use(store)
