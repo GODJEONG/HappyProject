@@ -4,6 +4,8 @@
     <router-link to="/about">About</router-link> |
     <router-link to="/login">login</router-link> |
     <router-link to="/manitto">design</router-link> |
+    <router-link to="/kakao">kakao</router-link> |
+
   </nav>
 
   <router-view />
