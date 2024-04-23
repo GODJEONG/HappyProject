@@ -101,7 +101,7 @@
           class="h-48 bg-slate-500 grid grid-cols-2"
           v-if="restaurant.isVisible"
         >
-          <div class="bg-slate-200">{{ restaurant.img }}</div>
+          <div class="bg-slate-200" src="@/src/assets/santa.png"></div>
           <div>
             <div class="text-5xl mt-2">{{ restaurant.name }}</div>
 
@@ -322,6 +322,7 @@ export default {
           checkedTagList.length + this.restaurantList[i].tag.length; //체크된 태그리스트 갯수랑 해당 레스토랑의 태그 객수를 더한것.
       }
     },
+    like() {},
   },
 };
 </script>
