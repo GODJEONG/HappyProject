@@ -1,11 +1,6 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/login">login</router-link> |
-    <router-link to="/manitto">design</router-link> |
-    <router-link to="/kakao">kakao</router-link> |
-
+    <router-link to="/food">food</router-link>
   </nav>
 
   <router-view />
