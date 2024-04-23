@@ -104,12 +104,14 @@
           <div class="bg-slate-200">{{ restaurant.img }}</div>
           <div>
             <div class="text-5xl mt-2">{{ restaurant.name }}</div>
+
             <button
               class="bg-white text-xl mt-1"
-              @click="like(restaurant.name)"
+              @click="likeplus(restaurant.name)"
             >
               좋아요
             </button>
+
             <div>{{ restaurant.likeCount }}</div>
             <br />
             <div>대표메뉴:&nbsp; {{ restaurant.menu }}</div>
@@ -136,20 +138,12 @@ export default {
       map: null, // 카카오맵 객체를 저장할 변수 추가
       markerList: [], // 마커 리스트를 저장할 변수 추가
       overlay: null, // 커스텀 오버레이 객체를 저장할 변수 추가
-      randomRestaurant: null,
+      randomRestaurant: {},
+      like: "",
     };
   },
   async created() {
     this.lunchdata();
-
-    //지도 그리기,
-    // 지도 마커들 찍기 메서드 호출
-    // for (let i = 0; i < this.restaurantList.length; i++) {
-    //     if (this.restaurantList[i].isMap===true){
-    //         //마커찍기
-
-    //     }
-    // }
   },
 
   mounted() {
@@ -240,49 +234,6 @@ export default {
 
     //--------------------------------------------------
 
-    getRestaurantList() {
-      //서버에 식당리스트를 요청한다
-      const response = [
-        {
-          name: "식당1",
-          description: "식당설명",
-          menu: "메뉴1,메뉴2,메뉴3",
-          img: "DB에서 불러온 사진.jpg",
-          likeCount: 0,
-          tag: ["해장", "고기"],
-          isLike: false,
-          isVisible: true,
-          isMap: true,
-          //isMap 가 트루인애들만 좌표주기
-        },
-        {
-          name: "식당2",
-          description: "식당설명",
-          menu: "메뉴1,메뉴2,메뉴3",
-          img: "DB에서 불러온 사진.jpg",
-          likeCount: 0,
-          tag: ["면", "해장"],
-          isLike: false,
-          isVisible: true,
-        },
-        {
-          name: "식당3",
-          description: "식당설명",
-          menu: "메뉴1,메뉴2,메뉴3",
-          img: "DB에서 불러온 사진.jpg",
-          likeCount: 0,
-          tag: ["간단", "건강"],
-          isLike: false,
-          isVisible: true,
-        },
-      ];
-      //식당리스트를 받는다
-
-      //받은 식당 리스트를 출력한다
-      console.log(response);
-      this.restaurantList = response;
-    },
-
     lunchdata() {
       let url = "http://localhost:3000/lunchselect";
       axios.get(url).then((res) => {
@@ -300,14 +251,9 @@ export default {
         console.log(res.data);
         const randomRestaurant = this.getRandomLunch(res.data);
         this.randomRestaurant = randomRestaurant;
+        console.log(this.randomRestaurant);
 
-        //const randomRestaurant = res.data;
-
-        // for (let i = 0; i < this.restaurantList.length; i++) {
-        //   this.restaurantList[i].isVisible = false;
-        // }
-        // // 랜덤으로 선택된 식당만 화면에 표시되도록 isVisible을 true로 설정합니다.
-        // randomRestaurant.isVisible = true;
+        alert("선정된 음식점은 " + this.randomRestaurant.name + "입니다");
       });
     },
 
@@ -316,53 +262,47 @@ export default {
       const randomIndex = Math.floor(Math.random() * array.length);
       const randomItem = array[randomIndex];
       console.log("엑시오스");
-      if (!randomItem || !randomItem.RestaurantList) {
+      if (!randomItem || !randomItem.id) {
         console.error(
           "Invalid data format or missing 'lunch' property:",
           randomItem
         );
         return null;
       }
-      return randomItem.RestaurantList;
+      return randomItem;
     },
 
-    getRandomMission(array) {
-      if (array.length === 0) {
-        return null;
-      }
-      const randomIndex = Math.floor(Math.random() * array.length);
-      const randomItem = array[randomIndex];
-      if (!randomItem || !randomItem.mission) {
-        console.error(
-          "Invalid data format or missing 'misiion' property:",
-          randomItem
-        );
-        return null;
-      }
-      return randomItem.mission;
+    likeplus(a) {
+      alert("좋아요추가");
+      let obj = {};
+      obj.name = a;
+      axios
+        .get("http://localhost:3000/likeplus", {
+          //매개변수 두개라서 콤마가 들어감.{}는  object임.
+          params: obj,
+        })
+        .then((res) => {
+          console.log(res);
+          this.likecheck(obj.name);
+        });
     },
 
-    like(name) {
-      //서버에 식당을 좋아요 처리 요청
-      alert("좋아요클릭");
-      //좋아요 처리 응답받음
-      let url = "http://localhost:3000/lunchLike";
-      axios.get(url).then((res) => {
-        console.log(res.data);
-        this.likeCount = res.data;
-        console.log(this.likeCount);
-      });
-      //좋아요 숫자 올려줌, 눌린 하트처리, 두번은안눌림, 취소없음.
-      for (let i = 0; i < this.restaurantList.length; i++) {
-        if (
-          name === this.restaurantList[i].name &&
-          this.restaurantList[i].isLike == false
-        ) {
-          this.restaurantList[i].likeCount++;
-          this.restaurantList[i].isLike = true;
-        }
-      }
+    likecheck(a) {
+      alert("좋아요체크");
+      let obj = {};
+      obj.name = a;
+      axios
+        .get("http://localhost:3000/likeselect", {
+          //매개변수 두개라서 콤마가 들어감.{}는  object임.
+          params: obj,
+        })
+        .then((res) => {
+          console.log(res); //
+          console.log(res.data); //
+          this.like = res;
+        });
     },
+
     closeOverlay() {
       // 커스텀 오버레이를 닫기 위한 메소드
       this.overlay.setMap(null);
