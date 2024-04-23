@@ -1,14 +1,11 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/login">login</router-link> |
-    <router-link to="/manitto">design</router-link> |
-    <router-link to="/kakao">kakao</router-link> |
+  <!-- <nav>
+    <router-link to="/">login</router-link> |
+    <router-link to="/mainpage">mainpage</router-link> |
+    <router-link to="/manitto">manitto</router-link> |
+  </nav> -->
 
-  </nav>
-
-  <router-view />
+  <router-view /> 
 </template>
 
 <style>

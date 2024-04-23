@@ -1,10 +1,15 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-
+    <br />
     <button @click="btn_userInfo">사용자 정보 가져오기</button>
+    <br />
     <button @click="btn_off">연결 끊기</button>
+    <br />
+    <button @click="btn_lgout">로그아웃</button>
+    <br />
     <button @click="message2">메세지</button>
+    <br />
   </div>
 </template>
   
@@ -20,6 +25,8 @@ export default {
     return {
       code: null,
       token: null,
+      obj: {client_id: "12ae0e55e8683634dad5cd43379a1a84", 
+      logout_redirect_uri: "http://localhost:8080/logout"},
     };
   },
   created() {
@@ -31,6 +38,7 @@ export default {
     async setKakaoToken() {
       console.log("카카오 인증 코드", this.$route.query.code);
       this.code = this.$route.query.code;
+
       const { data } = await getKakaoToken(this.$route.query.code);
       if (data.error) {
         alert("카카오톡 로그인 오류입니다.");
@@ -38,6 +46,7 @@ export default {
         return;
       }
       window.Kakao.Auth.setAccessToken(data.access_token);
+
       console.log("token: ", data.access_token);
       this.token = data.access_token;
       vueCookies.set("access-token", data.access_token, "1d");
@@ -59,14 +68,53 @@ export default {
     },
 
     //연결 끊기
-    btn_off() {
-      axios.post("https://kapi.kakao.com/v1/user/unlink", null, {
+    async btn_off() {
+        vueCookies.keys().forEach((cookie) => vueCookies.remove(cookie));
+      await axios.post("https://kapi.kakao.com/v1/user/unlink", null, {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
           Authorization: "Bearer " + this.token,
         },
+      })
+      .then((res) => {
+        alert('성공');
+        console.log(res);
       });
+
+      if (!window.Kakao.Auth.getAccessToken()) {
+          console.log('Not logged in.');
+          return;
+        }
+        window.Kakao.Auth.logout(function () {
+            vueCookies.remove("access-token");
+            vueCookies.remove("refresh-token");
+          alert('로그아웃 되었습니다.', window.Kakao.Auth.getAccessToken());
+        });
     },
+    
+    //로그아웃
+    // btn_lgout() {
+
+    //   axios.post("https://kauth.kakao.com/oauth/logout", this.obj, {
+    //     headers: {
+    //       "Content-Type": "application/x-www-form-urlencoded",
+    //       Authorization: "Bearer " + this.token,
+    //     },
+    //   })
+    //   .then(res => {
+    //     console.log(res);
+    //     if (!window.Kakao.Auth.getAccessToken()) {
+    //       console.log('Not logged in.');
+    //       return;
+    //     }
+    //     window.Kakao.Auth.logout(function () {
+    //         vueCookies.remove("access-token");
+    //         vueCookies.remove("refresh-token");
+    //       alert('로그아웃 되었습니다.', window.Kakao.Auth.getAccessToken());
+    //     });
+    //   });
+    // },
+
     message2() {
       window.Kakao.API.request({
         url: "/v2/api/talk/memo/default/send",

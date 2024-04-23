@@ -51,7 +51,7 @@
         <h3
           class="text-slate-900 dark:text-slate-400 mt-5 text-5xl font-bold tracking-tight"
         >
-          당신의 마니또는
+         {{name}} 님의 마니또는
         </h3>
         <p class="text-slate-500 dark:text-white mt-2 text-6xl font-bold">
           {{ manitto }} 님 입니다
@@ -141,6 +141,8 @@
           </div>
         </div>
       </div>
+
+      
     </div>
   </html>
 </template>
@@ -158,7 +160,7 @@ export default {
       manitto: "",
       manitto_mission: "",
       meno: "",
-      name: "신정",
+      name:this.$store.getters.getlogin_info.name,
       mymanitto_meno: "",
     };
   },
@@ -179,6 +181,7 @@ export default {
             alert("매칭가능한 마니또가 없습니다!!");
           } else {
             this.manitto_update();
+            console.log(this.name);
           }
           console.log(this.manitto);
         });

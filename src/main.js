@@ -11,4 +11,4 @@ createApp(App)
 .use(store)
 .mount('#app')
 
-window.Kakao.init('d52af6bcfd64fffef249b6db43141eb9'); // JavaScript 키
+window.Kakao.init('da502da2fd42d70c0e81840ed1a15096'); // JavaScript 키
