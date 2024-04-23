@@ -5,7 +5,7 @@
     >
       오늘 뭐먹을까yo?
     </h1>
-    <button @click="lunchdata">점심정보</button>
+
     <!--지도띄우기-->
     <div
       class="my-8 border border solid 7px"
@@ -18,17 +18,20 @@
         box-shadow: 0 11px 15px rgba(1, 2, 1, 0.2);
       "
     ></div>
+
     <br />
-    <div class="text-slate-500">강남역 맛집 지도</div>
+    <div class="text-slate-500 text-5xl">강남역 맛집 지도</div>
     <br /><br /><br /><br /><br /><br /><br />
 
     <h2
       class="box-decoration-slice bg-gradient-to-r from-green-500 to-green-200 text-white px-2 mx-auto px-4 text-6xl my-12"
     >
-      오늘 점심, &nbsp;&nbsp;&nbsp;<button @click="random">@랜덤돌리기@</button>
+      오늘 점심, &nbsp;&nbsp;&nbsp;
+      <button @click="random">@랜덤돌리기@</button>
     </h2>
 
     <ul class="grid grid-cols-1 gap-4">
+      <!-- 랜덤 그리드-->
       <template v-if="randomRestaurant">
         <li class="h-48 bg-slate-500 grid grid-cols-2">
           <div class="bg-slate-200">{{ randomRestaurant.img }}</div>
@@ -39,6 +42,7 @@
         </li>
       </template>
     </ul>
+
     <br /><br /><br /><br /><br /><br /><br />
 
     <h2
@@ -47,37 +51,42 @@
       취향별로 골라줄게요
     </h2>
 
-    <div class="text-xl my-7">
+    <div class="text-4xl my-7">
       <input
         type="checkbox"
         v-model="checkedTagList"
         value="해장"
         checked
       /><label>해장</label>&nbsp;
+
       <input
         type="checkbox"
         v-model="checkedTagList"
         value="고기"
         :checked="true"
       /><label>고기</label>&nbsp;
+
       <input
         type="checkbox"
         v-model="checkedTagList"
         value="간단"
         :checked="true"
       /><label>간단</label>&nbsp;
+
       <input
         type="checkbox"
         v-model="checkedTagList"
         value="건강"
         :checked="true"
       /><label>건강</label>&nbsp;
+
       <input
         type="checkbox"
         v-model="checkedTagList"
         value="든든"
         :checked="true"
       /><label>든든</label>&nbsp;
+
       <input
         type="checkbox"
         v-model="checkedTagList"
@@ -170,7 +179,7 @@ export default {
         // 마커를 생성합니다
         const markerPositions = [
           {
-            title: "비트빌",
+            title: "★★비트빌★★",
             latlng: new kakao.maps.LatLng(37.4946121, 127.0275794),
           },
           {
@@ -230,6 +239,7 @@ export default {
     //--------------------------------------------------
 
     //--------------------------------------------------
+
     getRestaurantList() {
       //서버에 식당리스트를 요청한다
       const response = [
@@ -286,7 +296,10 @@ export default {
       alert("랜덤 점심 돌아가는중~");
       let url = "http://localhost:3000/randomLunch";
       axios.get(url).then((res) => {
-        this.randomRestaurant = this.getRandomLunch(res.data);
+        console.log(res);
+        console.log(res.data);
+        const randomRestaurant = this.getRandomLunch(res.data);
+        this.randomRestaurant = randomRestaurant;
 
         //const randomRestaurant = res.data;
 
@@ -298,19 +311,35 @@ export default {
       });
     },
 
+    //if문이 실행되고있음.
     getRandomLunch(array) {
       const randomIndex = Math.floor(Math.random() * array.length);
       const randomItem = array[randomIndex];
-
+      console.log("엑시오스");
       if (!randomItem || !randomItem.RestaurantList) {
+        console.error(
+          "Invalid data format or missing 'lunch' property:",
+          randomItem
+        );
+        return null;
+      }
+      return randomItem.RestaurantList;
+    },
+
+    getRandomMission(array) {
+      if (array.length === 0) {
+        return null;
+      }
+      const randomIndex = Math.floor(Math.random() * array.length);
+      const randomItem = array[randomIndex];
+      if (!randomItem || !randomItem.mission) {
         console.error(
           "Invalid data format or missing 'misiion' property:",
           randomItem
         );
         return null;
       }
-      console.log("엑시오스");
-      return randomItem.RestaurantList;
+      return randomItem.mission;
     },
 
     like(name) {
