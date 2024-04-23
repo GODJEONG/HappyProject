@@ -26,6 +26,7 @@
                 >Your ID</label
               >
               <input
+                v-model="id_input"
                 type="text"
                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="ID를 입력하세요."
@@ -38,6 +39,7 @@
                 >Password</label
               >
               <input
+                v-model="password_input"
                 type="password"
                 placeholder="••••••••"
                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -56,9 +58,18 @@
             </div>
 
             <button
-              class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              @click="baselogin()"
+              class="mb-0 w-full h-12 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Sign in
+            </button>
+
+            <button class="w-full h-12" @click="kakaologin()">
+              <img
+                src="@/assets/kakaologin.png"
+                alt="kakao"
+                class="w-full h-12"
+              />
             </button>
             <p class="text-sm font-light text-gray-500 dark:text-gray-400">
               Don’t have an account yet?
@@ -221,6 +232,9 @@ export default {
       id_result: false,
       pw: "",
       pw2: "",
+      id_input: "",
+      password_input: "",
+      login_info: {},
     };
   },
   methods: {
@@ -307,10 +321,6 @@ export default {
         })
         .then((res) => {
           console.log(res);
-          this.$store.commit("info", obj);
-          console.log(this.$store.getters.getlogin_info);
-          console.log(this.$store.getters.getlogin_info[0]);
-          console.log(this.$store.getters.getlogin_info[0].name);
         })
         .catch((error) => {
           // 요청 실패 시 에러 메시지 출력
@@ -320,6 +330,37 @@ export default {
 
     join_press() {
       this.join_check = true;
+    },
+
+    baselogin() {
+      let obj = {};
+      obj.id = this.id_input;
+      obj.password = this.password_input;
+
+      let url = "http://localhost:3000/membercheck";
+      axios
+        .get(url, {
+          params: obj,
+        })
+        .then((res) => {
+          console.log(res);
+          this.$store.commit("info", res);
+          console.log(this.$store.getters.getlogin_info);
+          this.login_info = this.$store.getters.getlogin_info;
+          console.log(this.login_info.name);
+          this.$router.push("/mainpage");
+        })
+        .catch((error) => {
+          // 요청 실패 시 에러 메시지 출력
+          console.error("로그인 요청에 실패했습니다:", error);
+        });
+    },
+
+    kakaologin() {
+      window.Kakao.Auth.authorize({
+        redirectUri: "http://localhost:8080/mainpage",
+        prompt: "select_account",
+      });
     },
   },
 };
