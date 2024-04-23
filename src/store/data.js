@@ -3,7 +3,8 @@ import { createStore } from 'vuex'
 
 const store = createStore({
     state: {
-        login_info: []
+        login_info: [],
+        token:[]
     },
     mutations: {
         create(state, obj) {
@@ -34,6 +35,15 @@ const store = createStore({
 
         },
 
+        token(state,obj) {
+            console.log(state);
+            console.log('============');
+            state.token.push(obj);
+
+            console.log(state.token);
+
+        },
+
     },
     getters: {
         getlogin_info(state) {
@@ -41,6 +51,14 @@ const store = createStore({
                 return 1
             else {
                 return state.login_info[0].data[0]
+            }
+        },
+
+        gettoken(state) {
+            if (state.token[0] == null)
+                return 1
+            else {
+                return state.token[0]
             }
         },
     }

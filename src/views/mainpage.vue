@@ -75,14 +75,15 @@
               href="#"
               >Contents</a
             >
-            <a @click="btn_userInfo()"
+            <a
               class="text-sm text-white hover:text-neutral-300 md:py-4 focus:outline-none focus:text-neutral-300"
               href="#"
               >Games</a
             >
 
             <div>
-              <a @click="btn_off()"
+              <a
+                @click="logout()"
                 class="group inline-flex items-center gap-x-2 py-2 px-3 bg-[#ff0] font-medium text-sm text-neutral-800 rounded-full focus:outline-none"
               >
                 Logout
@@ -142,7 +143,8 @@
             class="grid grid-cols-1 lg:grid-cols-3 items-center border border-neutral-700 divide-y lg:divide-y-0 lg:divide-x divide-neutral-700 rounded-xl"
           >
             <!-- Card -->
-            <a @click="gomanitto()"
+            <a
+              @click="gomanitto()"
               class="group relative z-10 p-4 md:p-6 h-full flex flex-col bg-neutral-900 first:rounded-t-xl last:rounded-b-xl lg:first:rounded-l-xl lg:first:rounded-tr-none lg:last:rounded-r-xl lg:last:rounded-bl-none before:absolute before:inset-0 before:bg-gradient-to-b before:hover:from-transparent before:hover:via-transparent before:hover:to-[#ff0]/10 before:via-80% before:-z-[1] before:last:rounded-b-xl lg:before:first:rounded-s-xl lg:before:last:rounded-e-xl lg:before:last:rounded-bl-none before:opacity-0 before:hover:opacity-100"
               href="#"
             >
@@ -569,91 +571,40 @@
 
 <script>
 import axios from "axios";
-import { getKakaoToken } from "@/views/kakaoLogin.js";
 import vueCookies from "vue-cookies";
 
 export default {
   name: "App",
   data() {
     return {
-      code: null,
-      token: null,
-      obj: {
-        client_id: "12ae0e55e8683634dad5cd43379a1a84",
-        logout_redirect_uri: "http://localhost:8080/logout",
-      },
+      name: this.$store.getters.getlogin_info.name,
+      login_type: this.$store.getters.getlogin_info.login_type,
+      token: this.$store.getters.gettoken.token,
     };
   },
-  created() {
+
+ created() {
     if (this.$route.query.code) {
       this.setKakaoToken();
     }
   },
+
   methods: {
-
-    gomanitto(){
+    gomanitto() {
       this.$router.push("/manitto");
-    },
-    async setKakaoToken() {
-      console.log("카카오 인증 코드", this.$route.query.code);
-      this.code = this.$route.query.code;
-
-      const { data } = await getKakaoToken(this.$route.query.code);
-      if (data.error) {
-        alert("카카오톡 로그인 오류입니다.");
-        this.$router.go();
-        return;
-      }
-      window.Kakao.Auth.setAccessToken(data.access_token);
-
-      console.log("token: ", data.access_token);
-      this.token = data.access_token;
-      vueCookies.set("access-token", data.access_token, "1d");
-      vueCookies.set("refresh-token", data.refresh_token, "1d");
+      console.log(this.name);
+      console.log(this.login_type);
+      console.log(this.token);
     },
 
-    //사용자 정보 가져오기
-    btn_userInfo() {
-      console.log("btn_userInfo");
-      axios
-        .get("https://kapi.kakao.com/v2/user/me", {
-          headers: {
-            Authorization: "Bearer " + this.token,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-          console.log(res.data.properties.nickname);
-          console.log(res.data.properties.profile_image);
-
-          let obj = {};
-          obj.name = res.data.properties.nickname;
-          let url = "http://localhost:3000/kakaomembercheck";
-          axios
-            .get(url, {
-              params: obj,
-            })
-            .then((res) => {
-              console.log(res);
-              this.$store.commit("info", res);
-              console.log(this.$store.getters.getlogin_info);
-              this.login_info = this.$store.getters.getlogin_info;
-              console.log(this.login_info.name);
-            })
-            .catch((error) => {
-              // 요청 실패 시 에러 메시지 출력
-              console.error("로그인 요청에 실패했습니다:", error);
-            });
-        });
-    },
-    // 로그아웃
+    // 카카오 로그아웃
     async btn_off() {
       vueCookies.keys().forEach((cookie) => vueCookies.remove(cookie));
       await axios
         .post("https://kapi.kakao.com/v1/user/unlink", null, {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
-            Authorization: "Bearer " + this.token,
+            Authorization: "Bearer " +  this.token,
           },
         })
         .then((res) => {
@@ -676,6 +627,48 @@ export default {
         alert("로그아웃 되었습니다.", window.Kakao.Auth.getAccessToken());
         this.$router.push("/");
       });
+    },
+
+    logout() {
+      let obj = {};
+      obj.name = this.name;
+      console.log(obj.name);
+      let url = "http://localhost:3000/logout";
+
+      if (this.login_type == "2") {
+        axios
+          .get(url, {
+            params: obj,
+          })
+          .then((res) => {
+            console.log(res);
+            this.btn_off();
+          })
+          .catch((error) => {
+            console.error(
+              "데이터베이스 로그아웃 업데이트에 실패했습니다.",
+              error
+            );
+          });
+      } else if (this.login_type == "1") {
+        axios
+          .get(url, {
+            params: obj,
+          })
+          .then((res) => {
+            console.log(res);
+            this.$router.push("/");
+          })
+          .catch((error) => {
+            console.error(
+              "데이터베이스 로그아웃 업데이트에 실패했습니다.",
+              error
+            );
+          });
+      } else {
+        alert("이미 로그아웃된 상태입니다.");
+        this.$router.push("/");
+      }
     },
   },
 };
