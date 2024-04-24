@@ -134,14 +134,14 @@
             <div class="text-5xl mt-2">{{ restaurant.name }}</div>
 
             <button
-              class="bg-white text-xl mt-1"
+              class="border-4 border-amber-500 text-xm text-slate-100 bg-amber-500 rounded-full drop-shadow-lg"
               @click="likeplus(restaurant.name)"
             >
               좋아요
             </button>
 
             <div>{{ restaurant.likeCount }}</div>
-            <br />
+
             <div>대표메뉴:&nbsp; {{ restaurant.menu }}</div>
             <div class="text-2xl">{{ restaurant.description }}</div>
 
@@ -176,33 +176,188 @@ export default {
       like: "",
       overlay: {},
       bitaddress:
-        '<div class="wrap my-8 solid text-white bg-sky-900 w-24 h-24">' +
+        '<div class=" rounded-3xl wrap my-8 solid text-slate-700 bg-amber-100 border-solid drop-shadow-lg w-44 h-36">' +
         '    <div class="info">' +
         '        <div class="title ">' +
         "            비트컴퓨터 <br>" +
+        "DIGI 캠퍼스 <br>" +
         '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
         "        </div>" +
         '        <div class="body flex items-center justify-center">' +
         '            <div class="img">' +
         '               <img src="' +
         require("@/assets/KBICON.png") +
-        '" width="73" height="70">' +
+        '" width="73" height="73">' +
         "           </div>" +
         "        </div>" +
         "    </div>" +
         "</div>",
       cucharaaddress:
-        '<div class="wrap my-8 solid text-white bg-sky-900 w-24 h-24">' +
+        '<div class=" rounded-3xl wrap my-8 solid text-slate-700 bg-amber-100 border-solid drop-shadow-lg w-44 h-36">' +
         '    <div class="info">' +
         '        <div class="title ">' +
         "            쿠차라 <br>" +
+        "페이코가능 <br>" +
         '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
         "        </div>" +
         '        <div class="body flex items-center justify-center">' +
         '            <div class="img">' +
         '               <img src="' +
-        require("@/assets/santa.png") +
-        '" width="73" height="70">' +
+        require("@/assets/lunch/cuchara.jpg") +
+        '" width="100" height=100">' +
+        "           </div>" +
+        "        </div>" +
+        "    </div>" +
+        "</div>",
+      damsoaddress:
+        '<div class=" rounded-3xl wrap my-8 solid text-slate-700 bg-amber-100 border-solid drop-shadow-lg w-44 h-36">' +
+        '    <div class="info">' +
+        '        <div class="title ">' +
+        "            담소소사골순대육개장 <br>" +
+        "페이코가능 <br>" +
+        '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+        "        </div>" +
+        '        <div class="body flex items-center justify-center">' +
+        '            <div class="img">' +
+        '               <img src="' +
+        require("@/assets/lunch/damso.jpg") +
+        '" width="85" height=85">' +
+        "           </div>" +
+        "        </div>" +
+        "    </div>" +
+        "</div>",
+      ozzaddress:
+        '<div class=" rounded-3xl wrap my-8 solid text-slate-700 bg-amber-100 border-solid drop-shadow-lg w-44 h-36">' +
+        '    <div class="info">' +
+        '        <div class="title ">' +
+        "           오제제 <br>" +
+        "페이코가능 <br>" +
+        '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+        "        </div>" +
+        '        <div class="body flex items-center justify-center">' +
+        '            <div class="img">' +
+        '               <img src="' +
+        require("@/assets/lunch/ozz.jpg") +
+        '" width="85" height=85">' +
+        "           </div>" +
+        "        </div>" +
+        "    </div>" +
+        "</div>",
+      autoaddress:
+        '<div class=" rounded-3xl wrap my-8 solid text-slate-700 bg-amber-100 border-solid drop-shadow-lg w-44 h-36">' +
+        '    <div class="info">' +
+        '        <div class="title ">' +
+        "           오토김밥 <br>" +
+        "페이코불가 <br>" +
+        '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+        "        </div>" +
+        '        <div class="body flex items-center justify-center">' +
+        '            <div class="img">' +
+        '               <img src="' +
+        require("@/assets/lunch/autokimbab.jpg") +
+        '" width="85" height=85">' +
+        "           </div>" +
+        "        </div>" +
+        "    </div>" +
+        "</div>",
+      yagiaddress:
+        '<div class=" rounded-3xl wrap my-8 solid text-slate-700 bg-amber-100 border-solid drop-shadow-lg w-44 h-36">' +
+        '    <div class="info">' +
+        '        <div class="title ">' +
+        "           야기카레 <br>" +
+        "페이코가능 <br>" +
+        '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+        "        </div>" +
+        '        <div class="body flex items-center justify-center">' +
+        '            <div class="img">' +
+        '               <img src="' +
+        require("@/assets/lunch/yagi.jpg") +
+        '" width="100" height=100">' +
+        "           </div>" +
+        "        </div>" +
+        "    </div>" +
+        "</div>",
+      eulmidaeaddress:
+        '<div class=" rounded-3xl wrap my-8 solid text-slate-700 bg-amber-100 border-solid drop-shadow-lg w-44 h-40">' +
+        '    <div class="info">' +
+        '        <div class="title ">' +
+        "           을밀대 <br>" +
+        "페이코가능 <br>" +
+        '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+        "        </div>" +
+        '        <div class="body flex items-center justify-center">' +
+        '            <div class="img">' +
+        '               <img src="' +
+        require("@/assets/lunch/eulmidae.jpg") +
+        '" width="100" height=100">' +
+        "           </div>" +
+        "        </div>" +
+        "    </div>" +
+        "</div>",
+      dallaeddress:
+        '<div class=" rounded-3xl wrap my-8 solid text-slate-700 bg-amber-100 border-solid drop-shadow-lg w-44 h-40">' +
+        '    <div class="info">' +
+        '        <div class="title ">' +
+        "            달래해장<br>" +
+        "페이코불가 <br>" +
+        '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+        "        </div>" +
+        '        <div class="body flex items-center justify-center">' +
+        '            <div class="img">' +
+        '               <img src="' +
+        require("@/assets/lunch/dallae.jpg") +
+        '" width="100" height=100">' +
+        "           </div>" +
+        "        </div>" +
+        "    </div>" +
+        "</div>",
+      nongminddress:
+        '<div class=" rounded-3xl wrap my-8 solid text-slate-700 bg-amber-100 border-solid drop-shadow-lg w-44 h-40">' +
+        '    <div class="info">' +
+        '        <div class="title ">' +
+        "            농민백암순대<br>" +
+        "페이코불가 <br>" +
+        '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+        "        </div>" +
+        '        <div class="body flex items-center justify-center">' +
+        '            <div class="img">' +
+        '               <img src="' +
+        require("@/assets/lunch/dallae.jpg") +
+        '" width="100" height=100">' +
+        "           </div>" +
+        "        </div>" +
+        "    </div>" +
+        "</div>",
+      giriamaddress:
+        '<div class=" rounded-3xl wrap my-8 solid text-slate-700 bg-amber-100 border-solid drop-shadow-lg w-44 h-40">' +
+        '    <div class="info">' +
+        '        <div class="title ">' +
+        "            우동명가기리야마본진<br>" +
+        "페이코불가 <br>" +
+        '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+        "        </div>" +
+        '        <div class="body flex items-center justify-center">' +
+        '            <div class="img">' +
+        '               <img src="' +
+        require("@/assets/lunch/giriyama.jpg") +
+        '" width="100" height=100">' +
+        "           </div>" +
+        "        </div>" +
+        "    </div>" +
+        "</div>",
+      hanyuladdress:
+        '<div class=" rounded-3xl wrap my-8 solid text-slate-700 bg-amber-100 border-solid drop-shadow-lg w-44 h-40">' +
+        '    <div class="info">' +
+        '        <div class="title ">' +
+        "            한율막국수<br>" +
+        "페이코가능 <br>" +
+        '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+        "        </div>" +
+        '        <div class="body flex items-center justify-center">' +
+        '            <div class="img">' +
+        '               <img src="' +
+        require("@/assets/lunch/hanyul.jpg") +
+        '" width="100" height=100">' +
         "           </div>" +
         "        </div>" +
         "    </div>" +
@@ -246,9 +401,9 @@ export default {
             contents: this.bitaddress,
           },
           {
-            title: "을밀대",
-            latlng: new kakao.maps.LatLng(37.4953995, 127.030406),
-            contents: this.cucharaaddress,
+            title: "한율막국수",
+            latlng: new kakao.maps.LatLng(37.495022733, 127.03089256),
+            contents: this.hanyuladdress,
           },
           {
             title: "쿠차라",
@@ -258,22 +413,42 @@ export default {
           {
             title: "담소소사골순대육개장",
             latlng: new kakao.maps.LatLng(37.4952167, 127.0313495),
-            contents: this.content1,
+            contents: this.damsoaddress,
           },
           {
-            title: "담소소사골순대육개장",
+            title: "오제제",
             latlng: new kakao.maps.LatLng(37.4950386, 127.0297037),
-            contents: this.content1,
+            contents: this.ozzaddress,
           },
           {
-            title: "오토김밥",
+            title: "을밀대",
             latlng: new kakao.maps.LatLng(37.4953995, 127.030406),
-            contents: this.content1,
+            contents: this.eulmidaeaddress,
           },
           {
             title: "야기카레",
             latlng: new kakao.maps.LatLng(37.4977256, 127.0292972),
-            contents: this.content1,
+            contents: this.yagiaddress,
+          },
+          {
+            title: "달래해장",
+            latlng: new kakao.maps.LatLng(37.4948989334878, 127.030554284573),
+            contents: this.dallaeddress,
+          },
+          {
+            title: "농민백암순대",
+            latlng: new kakao.maps.LatLng(37.4948989334878, 127.030554284573),
+            contents: this.nongminddress,
+          },
+          {
+            title: "우동명가기리야마본진",
+            latlng: new kakao.maps.LatLng(37.4948989334878, 127.030554284573),
+            contents: this.giriamaddress,
+          },
+          {
+            title: "오토김밥",
+            latlng: new kakao.maps.LatLng(37.4958508266732, 127.030978961142),
+            contents: this.autoaddress,
           },
           // 여기에 추가적인 마커 위치를 넣어주세요
         ];
