@@ -27,6 +27,11 @@ const routes = [
     name: 'popup',
     component: () => import(/* webpackChunkName: "about" */ '../views/bak_kakaopopup.vue')
   },
+  {
+    path: '/kakaoinfo',
+    name: 'kakaoinfo',
+    component: () => import(/* webpackChunkName: "about" */ '../views/kakaoinfo.vue')
+  },
 
 ]
 

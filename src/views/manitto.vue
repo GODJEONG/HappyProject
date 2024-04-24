@@ -1,19 +1,30 @@
 <template>
   <html class="dark">
     <div
-      class="bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 h-200"
+      class="bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 h-screen border-1"
     >
-      <div class="relative">
-        <img
-          @click="
-            meno_press();
-            getmanittomemo();
-          "
-          src="@/assets/alram.png"
-          class="max-w-4xl transition-transform duration-300 transform hover:scale-110"
-          style="max-width: 50px"
-        />
+      <div class="container flex justify-between">
+        <div class="relative">
+          <img
+            @click="
+              meno_press();
+              getmanittomemo();
+            "
+            src="@/assets/alram.png"
+            class="max-w-4xl transition-transform duration-300 transform hover:scale-110 absolute left-0"
+            style="max-width: 50px"
+          />
+        </div>
+        <div class="relative">
+          <img
+            @click="gohome()"
+            src="@/assets/home.png"
+            class="max-w-4xl transition-transform duration-300 transform hover:scale-110 absolute right-0"
+            style="max-width: 50px"
+          />
+        </div>
       </div>
+
       <br />
 
       <br /><br />
@@ -33,7 +44,10 @@
         <br />
         <br />
         <button
-          @click="btn_start() ; mission()"
+          @click="
+            btn_start();
+            mission();
+          "
           class="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-6 border border-red-700 rounded text-3xl"
         >
           Start
@@ -51,12 +65,12 @@
         <h3
           class="text-slate-900 dark:text-slate-400 mt-5 text-5xl font-bold tracking-tight"
         >
-         {{name}} 님의 마니또는
+          {{ name }} 님의 마니또는
         </h3>
         <p class="text-slate-500 dark:text-white mt-2 text-6xl font-bold">
           {{ manitto }} 님 입니다
         </p>
-        <br>
+        <br />
         <h2 class="text-slate-500 dark:text-red-400 mt-2 text-3xl font-bold">
           [미션] {{ manitto_mission }}
         </h2>
@@ -141,8 +155,6 @@
           </div>
         </div>
       </div>
-
-      
     </div>
   </html>
 </template>
@@ -160,9 +172,12 @@ export default {
       manitto: "",
       manitto_mission: "",
       meno: "",
-      name:this.$store.getters.getlogin_info.name,
+      name: this.$store.getters.getlogin_info.name,
       mymanitto_meno: "",
     };
+  },
+  mounted() {
+    this.manitto_check2();
   },
   methods: {
     // 회원 DB 중 마니또 가능 인원 저장
@@ -232,6 +247,20 @@ export default {
         .then((res) => {
           console.log(res);
           alert(this.manitto + "에게 전달 완료");
+          this.slackgo();
+        });
+    },
+
+    slackgo(){
+      let obj = {};
+      obj.manitto=this.manitto;
+        let url = "http://localhost:3000/manittoslack";
+           axios
+        .get(url, {
+          params: obj,
+        })
+        .then((res) => {
+          console.log("slack complete"+ res);
         });
     },
 
@@ -300,11 +329,35 @@ export default {
     meno_press() {
       this.meno_check = true;
     },
+
+    gohome() {
+      this.$router.push("/mainpage");
+    },
+
+    manitto_check2() {
+      let obj = {};
+      obj.name = this.name;
+      let url = "http://localhost:3000/checkmanitto";
+      axios
+        .get(url, {
+          params: obj,
+        })
+        .then((res) => {
+          console.log(res);
+          console.log(res.data[0].cnt);
+          if (res.data[0].manitto == "0" || res.data[0].manitto == "") {
+            this.manitto_check = false;
+          } else {
+            this.manitto_check = true;
+            this.manitto = res.data[0].manitto;
+            this.meno = res.data[0].manitto_meno;
+          }
+          console.log(this.manitto_check);
+        });
+    },
   },
-  watch: {
-    manitto_check() {},
-    meno_check() {},
-  },
+
+
 };
 </script>
 
