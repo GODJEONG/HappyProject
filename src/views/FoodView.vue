@@ -117,10 +117,6 @@
     </div>
     <br /><br /><br /><br />
 
-    <!-- <div>
-      <img :src="" alt="이미지" class="bg-orange-100" />
-    </div> -->
-
     <ul class="grid grid-cols-2 gap-4">
       <template v-for="restaurant in restaurantList" :key="restaurant.name">
         <li
@@ -171,7 +167,6 @@ export default {
       checkedTagList: ["해장", "고기", "간단", "건강", "든든", "면"],
       map: null, // 카카오맵 객체를 저장할 변수 추가
       markerList: [], // 마커 리스트를 저장할 변수 추가
-      overlay: null, // 커스텀 오버레이 객체를 저장할 변수 추가
       randomRestaurant: {
         name: "점심을",
         menu: " 고르는",
@@ -179,6 +174,39 @@ export default {
         img: "pin.png",
       },
       like: "",
+      overlay: {},
+      bitaddress:
+        '<div class="wrap my-8 solid text-white bg-sky-900 w-24 h-24">' +
+        '    <div class="info">' +
+        '        <div class="title ">' +
+        "            비트컴퓨터 <br>" +
+        '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+        "        </div>" +
+        '        <div class="body flex items-center justify-center">' +
+        '            <div class="img">' +
+        '               <img src="' +
+        require("@/assets/KBICON.png") +
+        '" width="73" height="70">' +
+        "           </div>" +
+        "        </div>" +
+        "    </div>" +
+        "</div>",
+      cucharaaddress:
+        '<div class="wrap my-8 solid text-white bg-sky-900 w-24 h-24">' +
+        '    <div class="info">' +
+        '        <div class="title ">' +
+        "            쿠차라 <br>" +
+        '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+        "        </div>" +
+        '        <div class="body flex items-center justify-center">' +
+        '            <div class="img">' +
+        '               <img src="' +
+        require("@/assets/santa.png") +
+        '" width="73" height="70">' +
+        "           </div>" +
+        "        </div>" +
+        "    </div>" +
+        "</div>",
     };
   },
   created() {
@@ -215,30 +243,37 @@ export default {
           {
             title: "★★비트빌★★",
             latlng: new kakao.maps.LatLng(37.4946121, 127.0275794),
+            contents: this.bitaddress,
           },
           {
             title: "을밀대",
             latlng: new kakao.maps.LatLng(37.4953995, 127.030406),
+            contents: this.cucharaaddress,
           },
           {
             title: "쿠차라",
             latlng: new kakao.maps.LatLng(37.49669069999999, 127.0268555),
+            contents: this.cucharaaddress,
           },
           {
             title: "담소소사골순대육개장",
             latlng: new kakao.maps.LatLng(37.4952167, 127.0313495),
+            contents: this.content1,
           },
           {
             title: "담소소사골순대육개장",
             latlng: new kakao.maps.LatLng(37.4950386, 127.0297037),
+            contents: this.content1,
           },
           {
             title: "오토김밥",
             latlng: new kakao.maps.LatLng(37.4953995, 127.030406),
+            contents: this.content1,
           },
           {
             title: "야기카레",
             latlng: new kakao.maps.LatLng(37.4977256, 127.0292972),
+            contents: this.content1,
           },
           // 여기에 추가적인 마커 위치를 넣어주세요
         ];
@@ -264,14 +299,34 @@ export default {
 
           // 마커를 리스트에 추가합니다
           this.markerList.push(marker);
+
+          kakao.maps.event.addListener(marker, "click", () => {
+            this.lunchclick(marker, markerPositions[i].contents); // marker 객체를 매개변수로 전달합니다
+          });
         }
       });
     },
 
-    //지도그리기,마커 메소드 만들기
-
     //--------------------------------------------------
 
+    // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+    lunchclick(marker, contents) {
+      // 기존에 보이고 있는 오버레이가 있다면 숨깁니다.
+      if (this.overlay instanceof kakao.maps.CustomOverlay) {
+        this.overlay.setMap(null);
+      }
+
+      // 클릭한 마커에 해당하는 새로운 오버레이를 생성하여 보여줍니다.
+      this.overlay = new kakao.maps.CustomOverlay({
+        content: contents,
+        map: this.map,
+        position: marker.getPosition(),
+      });
+    },
+    // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다
+    closeOverlay() {
+      this.overlay.setMap(null);
+    },
     //--------------------------------------------------
 
     lunchdata() {
@@ -368,11 +423,6 @@ export default {
           this.like = res;
         });
     },
-
-    closeOverlay() {
-      // 커스텀 오버레이를 닫기 위한 메소드
-      this.overlay.setMap(null);
-    },
   },
   watch: {
     checkedTagList(checkedTagList) {
@@ -411,9 +461,12 @@ export default {
   top: 10px;
   left: 10px;
   z-index: 2;
-  background-color: hwb(56 49% 0%); /* 배경색 설정 */
-  padding: 10px; /* 오버레이 주위에 간격을 줍니다 */
-  border-radius: 16px; /* 모서리를 둥글게 만듭니다 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+  background-color: hwb(56 49% 0%); /* 오버레이의 배경색을 지정합니다 */
+  padding: 10px;
+  border-radius: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  /* 테두리 스타일 및 색상을 지정합니다 */
+  border: 2px solid black; /* 테두리의 두께와 색상을 지정합니다 */
 }
 </style>
