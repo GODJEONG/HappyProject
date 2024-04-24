@@ -1,7 +1,7 @@
 <template>
   <html class="dark">
     <div
-      class="bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 h-screen"
+      class="bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 h-screen border-1"
     >
       <div class="container flex justify-between">
         <div class="relative">
@@ -247,6 +247,20 @@ export default {
         .then((res) => {
           console.log(res);
           alert(this.manitto + "에게 전달 완료");
+          this.slackgo();
+        });
+    },
+
+    slackgo(){
+      let obj = {};
+      obj.manitto=this.manitto;
+        let url = "http://localhost:3000/manittoslack";
+           axios
+        .get(url, {
+          params: obj,
+        })
+        .then((res) => {
+          console.log("slack complete"+ res);
         });
     },
 
@@ -342,10 +356,8 @@ export default {
         });
     },
   },
-  watch: {
-    manitto_check() {},
-    meno_check() {},
-  },
+
+
 };
 </script>
 
