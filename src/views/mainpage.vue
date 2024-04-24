@@ -657,6 +657,7 @@ export default {
           })
           .then((res) => {
             console.log(res);
+            this.$store.commit("init");
             this.$router.push("/");
           })
           .catch((error) => {
@@ -666,7 +667,7 @@ export default {
             );
           });
       } else {
-        alert("이미 로그아웃된 상태입니다.");
+        this.$store.commit("init");
         this.$router.push("/");
       }
     },

@@ -50,7 +50,8 @@
               <div class="flex items-start">
                 <div class="ml-3 text-sm"></div>
               </div>
-              <a  @click="findpw()"
+              <a
+                @click="findpw()"
                 href="#"
                 class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
                 >Forgot password?</a
@@ -58,7 +59,7 @@
             </div>
 
             <button
-              @click="baselogin_status()"
+              @click="baselogin()"
               class="mb-0 w-full h-12 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Sign in
@@ -278,7 +279,7 @@ export default {
             this.name_result = false;
           } else {
             console.log("DIGI Campus 멤버입니다.");
-             alert("DIGI Campus 멤버입니다. 가입 가능합니다!");
+            alert("DIGI Campus 멤버입니다. 가입 가능합니다!");
             this.name_result = true;
           }
         })
@@ -347,7 +348,7 @@ export default {
         })
         .then((res) => {
           console.log(res);
-          this.baselogin();
+          console.log(res.data);
         })
         .catch((error) => {
           console.error(
@@ -369,12 +370,21 @@ export default {
         })
         .then((res) => {
           console.log(res);
-          this.$store.commit("info", res);
-          console.log(this.$store.getters.getlogin_info);
-          this.login_info = this.$store.getters.getlogin_info;
-          console.log(this.login_info.name);
-          console.log(this.login_info.login_type);
-          this.$router.push("/mainpage");
+
+          if ((res.data == "null") | (res.data == "")) {
+            alert("ID 혹은 PW가 다릅니다. 다시 입력해주세요");
+            return;
+          } else {
+            console.log(res);
+
+            this.$store.commit("info", res);
+            console.log(this.$store.getters.getlogin_info);
+            this.login_info = this.$store.getters.getlogin_info;
+            console.log(this.login_info.name);
+            console.log(this.login_info.login_type);
+            this.baselogin_status();
+            this.$router.push("/mainpage");
+          }
         })
         .catch((error) => {
           // 요청 실패 시 에러 메시지 출력
@@ -389,10 +399,11 @@ export default {
       });
     },
 
-
-    findpw(){
-
-    },
+    findpw() {},
+  },
+  watch: {
+    password_input() {},
+    id_input() {},
   },
 };
 </script>
