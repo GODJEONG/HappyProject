@@ -8,7 +8,7 @@
 
     <!--지도띄우기-->
     <div
-      class="my-8 border border solid 7px"
+      class="my-8 border 7px border-8 solid border-zinc-200"
       id="map"
       style="
         width: 1200px;
@@ -20,24 +20,36 @@
     ></div>
 
     <br />
-    <div class="text-slate-500 text-5xl">강남역 맛집 지도</div>
+    <div class="text-slate-600 text-3xl">강남역 맛집 지도</div>
     <br /><br /><br /><br /><br /><br /><br />
 
     <h2
       class="box-decoration-slice bg-gradient-to-r from-green-500 to-green-200 text-white px-2 mx-auto px-4 text-6xl my-12"
     >
-      오늘 점심, &nbsp;&nbsp;&nbsp;
-      <button @click="random">@랜덤돌리기@</button>
+      오늘 점심은? &nbsp;&nbsp;&nbsp;
+      <button class="text-slate-100 bg-amber-400 rounded-full" @click="random">
+        &nbsp;랜덤추천 Click!&nbsp;
+      </button>
     </h2>
 
     <ul class="grid grid-cols-1 gap-4">
       <!-- 랜덤 그리드-->
       <template v-if="randomRestaurant">
-        <li class="h-48 bg-slate-500 grid grid-cols-2">
-          <div class="bg-slate-200">{{ randomRestaurant.img }}</div>
+        <li class="h-48 bg-orange-200 grid grid-cols-2">
+          <div class="bg-orange-100">
+            <div class="bg-slate-200 ml-24">
+              <img
+                :src="require(`@/assets/${randomRestaurant.img}`)"
+                alt="이미지"
+                class="h-48 w-72"
+              />
+            </div>
+          </div>
+
           <div>
-            <div>{{ randomRestaurant.name }}</div>
-            <div>{{ randomRestaurant.menu }}</div>
+            <div class="text-5xl mt-10">{{ randomRestaurant.name }}</div>
+            <div class="text-2xl">{{ randomRestaurant.menu }}</div>
+            <div class="text-4xl">{{ randomRestaurant.description }}</div>
           </div>
         </li>
       </template>
@@ -52,56 +64,53 @@
     </h2>
 
     <div class="text-4xl my-7">
-      <input
-        type="checkbox"
-        v-model="checkedTagList"
-        value="해장"
-        checked
-      /><label>해장</label>&nbsp;
+      <input type="checkbox" v-model="checkedTagList" value="전체" /><label
+        class="text-bg-stone-600"
+        >전체</label
+      >&nbsp;&nbsp;
 
-      <input
-        type="checkbox"
-        v-model="checkedTagList"
-        value="고기"
-        :checked="true"
-      /><label>고기</label>&nbsp;
+      <input type="checkbox" v-model="checkedTagList" value="해장" /><label
+        >해장</label
+      >&nbsp;
 
-      <input
-        type="checkbox"
-        v-model="checkedTagList"
-        value="간단"
-        :checked="true"
-      /><label>간단</label>&nbsp;
+      <input type="checkbox" v-model="checkedTagList" value="고기" /><label
+        >고기</label
+      >&nbsp;
 
-      <input
-        type="checkbox"
-        v-model="checkedTagList"
-        value="건강"
-        :checked="true"
-      /><label>건강</label>&nbsp;
+      <input type="checkbox" v-model="checkedTagList" value="간단" /><label
+        >간단</label
+      >&nbsp;
 
-      <input
-        type="checkbox"
-        v-model="checkedTagList"
-        value="든든"
-        :checked="true"
-      /><label>든든</label>&nbsp;
+      <input type="checkbox" v-model="checkedTagList" value="건강" /><label
+        >건강</label
+      >&nbsp;
 
-      <input
-        type="checkbox"
-        v-model="checkedTagList"
-        value="면"
-        :checked="true"
-      /><label>면</label>&nbsp;
+      <input type="checkbox" v-model="checkedTagList" value="든든" /><label
+        >든든</label
+      >&nbsp;
+
+      <input type="checkbox" v-model="checkedTagList" value="면" /><label
+        >면</label
+      >&nbsp;
     </div>
+
+    <!-- <div>
+      <img :src="" alt="이미지" class="bg-orange-100" />
+    </div> -->
 
     <ul class="grid grid-cols-2 gap-4">
       <template v-for="restaurant in restaurantList" :key="restaurant.name">
         <li
-          class="h-48 bg-slate-500 grid grid-cols-2"
+          class="h-48 bg-orange-200 grid grid-cols-2"
           v-if="restaurant.isVisible"
         >
-          <div class="bg-slate-200" src="@/src/assets/santa.png"></div>
+          <div class="bg-orange-100 h-48 ml-24">
+            <img
+              :src="require(`@/assets/${restaurant.img}`)"
+              alt="이미지"
+              class="h-48 w-72"
+            />
+          </div>
           <div>
             <div class="text-5xl mt-2">{{ restaurant.name }}</div>
 
@@ -129,6 +138,7 @@
 
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
   data() {
@@ -138,11 +148,17 @@ export default {
       map: null, // 카카오맵 객체를 저장할 변수 추가
       markerList: [], // 마커 리스트를 저장할 변수 추가
       overlay: null, // 커스텀 오버레이 객체를 저장할 변수 추가
-      randomRestaurant: {},
+      randomRestaurant: {
+        name: "점심을",
+        menu: " 고르는",
+        description: "중이에요",
+        img: "pin.png",
+      },
       like: "",
     };
   },
-  async created() {
+  created() {
+    this.checkedTagList = []; // 모든 체크박스를 해제
     this.lunchdata();
   },
 
@@ -243,8 +259,12 @@ export default {
       });
     },
 
+    getImageUrl(img) {
+      // 이미지 요청 경로 반환
+      return `http://localhost:3000${img}`;
+    },
+
     random() {
-      alert("랜덤 점심 돌아가는중~");
       let url = "http://localhost:3000/randomLunch";
       axios.get(url).then((res) => {
         console.log(res);
@@ -253,7 +273,17 @@ export default {
         this.randomRestaurant = randomRestaurant;
         console.log(this.randomRestaurant);
 
-        alert("선정된 음식점은 " + this.randomRestaurant.name + "입니다");
+        // 선택된 음식점을 귀여운 팝업으로 표시
+
+        Swal.fire({
+          title: "선정된 음식점은",
+          html:
+            '<span class="text-5xl">' +
+            this.randomRestaurant.name +
+            "</span>" +
+            "입니다!",
+          icon: "success",
+        });
       });
     },
 
@@ -273,7 +303,11 @@ export default {
     },
 
     likeplus(a) {
-      alert("좋아요추가");
+      Swal.fire({
+        html: "좋아요를 누르셨습니다!",
+        icon: "success",
+      });
+
       let obj = {};
       obj.name = a;
       axios
@@ -285,10 +319,11 @@ export default {
           console.log(res);
           this.likecheck(obj.name);
         });
+
+      //window.location.reload();
     },
 
     likecheck(a) {
-      alert("좋아요체크");
       let obj = {};
       obj.name = a;
       axios
