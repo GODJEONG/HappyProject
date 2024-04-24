@@ -8,7 +8,7 @@
         class="flex items-center mb-6 text-3xl font-semibold text-white dark:text-white"
       >
         <img class="w-8 h-8 mr-2" src="@/assets/game1.png" alt="logo" />
-        Digi Story
+        Digi Game World
       </a>
       <div
         class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"
@@ -51,6 +51,7 @@
                 <div class="ml-3 text-sm"></div>
               </div>
               <a
+                @click="findpw()"
                 href="#"
                 class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
                 >Forgot password?</a
@@ -89,7 +90,7 @@
   <div
     id="join"
     v-if="join_check"
-    class="absolute inset-0 z-10 flex items-center justify-center top-80"
+    class="absolute inset-0 z-10 flex items-center justify-center top-10"
   >
     <div
       class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"
@@ -253,6 +254,7 @@ export default {
             this.id_result = false;
           } else {
             console.log("사용 가능한 ID입니다.");
+            alert("사용 가능한 ID입니다.");
             this.id_result = true;
           }
         })
@@ -273,10 +275,11 @@ export default {
         .then((res) => {
           console.log(res.data);
           if (!res.data.exists) {
-            alert("DIGI Campus 멤버만 가입 가능합니다!");
+            alert("DIGI Campus 멤버가 아닙니다. 가입이 불가능합니다!");
             this.name_result = false;
           } else {
             console.log("DIGI Campus 멤버입니다.");
+            alert("DIGI Campus 멤버입니다. 가입 가능합니다!");
             this.name_result = true;
           }
         })
@@ -321,6 +324,7 @@ export default {
         })
         .then((res) => {
           console.log(res);
+          this.join_check = false;
         })
         .catch((error) => {
           // 요청 실패 시 에러 메시지 출력
@@ -330,6 +334,28 @@ export default {
 
     join_press() {
       this.join_check = true;
+    },
+
+    baselogin_status() {
+      let obj = {};
+      obj.id = this.id_input;
+      obj.password = this.password_input;
+
+      let url = "http://localhost:3000/baselogin_status";
+      axios
+        .get(url, {
+          params: obj,
+        })
+        .then((res) => {
+          console.log(res);
+          console.log(res.data);
+        })
+        .catch((error) => {
+          console.error(
+            "일반 로그인 상태 업데이트 요청에 실패했습니다:",
+            error
+          );
+        });
     },
 
     baselogin() {
@@ -344,11 +370,21 @@ export default {
         })
         .then((res) => {
           console.log(res);
-          this.$store.commit("info", res);
-          console.log(this.$store.getters.getlogin_info);
-          this.login_info = this.$store.getters.getlogin_info;
-          console.log(this.login_info.name);
-          this.$router.push("/mainpage");
+
+          if ((res.data == "null") | (res.data == "")) {
+            alert("ID 혹은 PW가 다릅니다. 다시 입력해주세요");
+            return;
+          } else {
+            console.log(res);
+
+            this.$store.commit("info", res);
+            console.log(this.$store.getters.getlogin_info);
+            this.login_info = this.$store.getters.getlogin_info;
+            console.log(this.login_info.name);
+            console.log(this.login_info.login_type);
+            this.baselogin_status();
+            this.$router.push("/mainpage");
+          }
         })
         .catch((error) => {
           // 요청 실패 시 에러 메시지 출력
@@ -358,10 +394,16 @@ export default {
 
     kakaologin() {
       window.Kakao.Auth.authorize({
-        redirectUri: "http://localhost:8080/mainpage",
+        redirectUri: "http://localhost:8080/kakaoinfo",
         prompt: "select_account",
       });
     },
+
+    findpw() {},
+  },
+  watch: {
+    password_input() {},
+    id_input() {},
   },
 };
 </script>
