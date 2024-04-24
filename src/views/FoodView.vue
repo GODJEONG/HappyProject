@@ -1,14 +1,20 @@
 <template>
   <div class="app-container">
     <h1
-      class="box-decoration-slice bg-gradient-to-r from-yellow-500 to-yellow-300 text-white px-2 mx-auto px-4 text-6xl my-12"
+      class="box-content h-28 flex items-center justify-center box-decoration-slice bg-gradient-to-r from-yellow-400 to-yellow-300 text-white px-2 px-4 text-6xl drop-shadow-lg mb-12"
     >
       오늘 뭐먹을까yo?
     </h1>
+    <br />
+    <br />
 
     <!--지도띄우기-->
+    <div class="text-rose-800 text-4xl drop-shadow-sm">
+      강 남 역 &nbsp;맛 집 지 도
+    </div>
+
     <div
-      class="my-8 border 7px border-8 solid border-zinc-200"
+      class="my-8 border 7px border-8 solid border-red-500"
       id="map"
       style="
         width: 1200px;
@@ -20,28 +26,31 @@
     ></div>
 
     <br />
-    <div class="text-slate-600 text-3xl">강남역 맛집 지도</div>
+
     <br /><br /><br /><br /><br /><br /><br />
 
     <h2
-      class="box-decoration-slice bg-gradient-to-r from-green-500 to-green-200 text-white px-2 mx-auto px-4 text-6xl my-12"
+      class="box-content h-28 flex items-center justify-center box-decoration-slice bg-gradient-to-r from-yellow-400 to-yellow-300 text-white px-2 drop-shadow-lg mx-auto px-4 text-6xl my-12"
     >
       오늘 점심은? &nbsp;&nbsp;&nbsp;
-      <button class="text-slate-100 bg-amber-400 rounded-full" @click="random">
-        &nbsp;랜덤추천 Click!&nbsp;
-      </button>
     </h2>
+    <button
+      class="border-double border-4 border-yellow-600 text-5xl text-slate-100 bg-amber-600 rounded-full mb-8 drop-shadow-lg"
+      @click="random"
+    >
+      &nbsp;랜덤추천 Click!&nbsp;
+    </button>
 
-    <ul class="grid grid-cols-1 gap-4">
+    <ul class="grid gap-4" style="width: 80%; margin: 0 auto">
       <!-- 랜덤 그리드-->
       <template v-if="randomRestaurant">
-        <li class="h-48 bg-orange-200 grid grid-cols-2">
-          <div class="bg-orange-100">
-            <div class="bg-slate-200 ml-24">
+        <li class="bg-orange-200 grid grid-cols-2" style="width: 95%">
+          <div class="bg-orange-200 flex items-center justify-center">
+            <div>
               <img
                 :src="require(`@/assets/${randomRestaurant.img}`)"
                 alt="이미지"
-                class="h-48 w-72"
+                class="ml-30 h-48 w-53"
               />
             </div>
           </div>
@@ -58,41 +67,55 @@
     <br /><br /><br /><br /><br /><br /><br />
 
     <h2
-      class="box-decoration-slice bg-gradient-to-r from-green-400 to-yellow-300 text-white px-2 mx-auto px-4 text-6xl my-12"
+      class="box-content h-28 flex items-center justify-center box-decoration-slice bg-gradient-to-r from-yellow-400 to-yellow-300 text-white px-2 drop-shadow-lg mx-auto px-4 text-6xl"
     >
       취향별로 골라줄게요
     </h2>
 
+    <h2
+      class="box-content h-13 flex items-center justify-center box-decoration-slice bg-gradient-to-r from-slate-300 to-slate-400 text-slate-800 px-2 drop-shadow-lg mx-auto px-4 text-xl my-5"
+    >
+      카테고리를 선택하세요<br />
+      ▼
+    </h2>
+
     <div class="text-4xl my-7">
       <input type="checkbox" v-model="checkedTagList" value="전체" /><label
-        class="text-bg-stone-600"
+        class="text-bg-stone-600 drop-shadow-lg"
         >전체</label
       >&nbsp;&nbsp;
 
       <input type="checkbox" v-model="checkedTagList" value="해장" /><label
+        class="text-bg-stone-600 drop-shadow-lg"
         >해장</label
       >&nbsp;
 
       <input type="checkbox" v-model="checkedTagList" value="고기" /><label
+        class="text-bg-stone-600 drop-shadow-lg"
         >고기</label
       >&nbsp;
 
       <input type="checkbox" v-model="checkedTagList" value="간단" /><label
+        class="text-bg-stone-600 drop-shadow-lg"
         >간단</label
       >&nbsp;
 
       <input type="checkbox" v-model="checkedTagList" value="건강" /><label
+        class="text-bg-stone-600 drop-shadow-lg"
         >건강</label
       >&nbsp;
 
       <input type="checkbox" v-model="checkedTagList" value="든든" /><label
+        class="text-bg-stone-600 drop-shadow-lg"
         >든든</label
       >&nbsp;
 
       <input type="checkbox" v-model="checkedTagList" value="면" /><label
+        class="text-bg-stone-600 drop-shadow-lg"
         >면</label
       >&nbsp;
     </div>
+    <br /><br /><br /><br />
 
     <!-- <div>
       <img :src="" alt="이미지" class="bg-orange-100" />
@@ -265,26 +288,33 @@ export default {
     },
 
     random() {
-      let url = "http://localhost:3000/randomLunch";
-      axios.get(url).then((res) => {
-        console.log(res);
-        console.log(res.data);
-        const randomRestaurant = this.getRandomLunch(res.data);
-        this.randomRestaurant = randomRestaurant;
-        console.log(this.randomRestaurant);
-
-        // 선택된 음식점을 귀여운 팝업으로 표시
-
-        Swal.fire({
-          title: "선정된 음식점은",
-          html:
-            '<span class="text-5xl">' +
-            this.randomRestaurant.name +
-            "</span>" +
-            "입니다!",
-          icon: "success",
-        });
+      Swal.fire({
+        title: "랜덤 점심 선택 중입니다!",
+        icon: "info",
       });
+
+      setTimeout(() => {
+        let url = "http://localhost:3000/randomLunch";
+        axios.get(url).then((res) => {
+          console.log(res);
+          console.log(res.data);
+          const randomRestaurant = this.getRandomLunch(res.data);
+          this.randomRestaurant = randomRestaurant;
+          console.log(this.randomRestaurant);
+
+          // 선택된 음식점을 귀여운 팝업으로 표시
+
+          Swal.fire({
+            title: "선정된 음식점은",
+            html:
+              '<span class="text-4xl">' +
+              this.randomRestaurant.name +
+              "</span>" +
+              "입니다!",
+            icon: "success",
+          });
+        });
+      }, 3000); // 3초(3000밀리초) 후에 실행
     },
 
     //if문이 실행되고있음.
@@ -372,7 +402,7 @@ export default {
 }
 
 .app-container {
-  background-image: url("@/assets/cute-food-illustration-character_553316-15.jpg");
+  background-image: url("@/assets/backfood.jpg");
 }
 
 .overlay-container {

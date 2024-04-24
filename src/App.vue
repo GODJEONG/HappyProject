@@ -1,7 +1,7 @@
 <template>
-  <nav>
+  <!-- <nav>
     <router-link to="/food">food</router-link>
-  </nav>
+  </nav> -->
 
   <router-view />
 </template>
