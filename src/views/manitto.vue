@@ -159,7 +159,6 @@
   </html>
 </template>
 
-
 <script>
 import axios from "axios";
 
@@ -251,16 +250,16 @@ export default {
         });
     },
 
-    slackgo(){
+    slackgo() {
       let obj = {};
-      obj.manitto=this.manitto;
-        let url = "http://localhost:3000/manittoslack";
-           axios
+      obj.manitto = this.manitto;
+      let url = "http://localhost:3000/manittoslack";
+      axios
         .get(url, {
           params: obj,
         })
         .then((res) => {
-          console.log("slack complete"+ res);
+          console.log("slack complete" + res);
         });
     },
 
@@ -356,8 +355,6 @@ export default {
         });
     },
   },
-
-
 };
 </script>
 
@@ -367,4 +364,3 @@ export default {
   justify-content: center;
 }
 </style>
-

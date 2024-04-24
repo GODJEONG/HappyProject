@@ -182,6 +182,7 @@
 
             <!-- Card -->
             <a
+              @click="golunch()"
               class="group relative z-10 p-4 md:p-6 h-full flex flex-col bg-neutral-900 first:rounded-t-xl last:rounded-b-xl lg:first:rounded-l-xl lg:first:rounded-tr-none lg:last:rounded-r-xl lg:last:rounded-bl-none before:absolute before:inset-0 before:bg-gradient-to-b before:hover:from-transparent before:hover:via-transparent before:hover:to-[#ff0]/10 before:via-80% before:-z-[1] before:last:rounded-b-xl lg:before:first:rounded-s-xl lg:before:last:rounded-e-xl lg:before:last:rounded-bl-none before:opacity-0 before:hover:opacity-100"
               href="#"
             >
@@ -568,7 +569,6 @@
   </body>
 </template>
 
-
 <script>
 import axios from "axios";
 import vueCookies from "vue-cookies";
@@ -583,7 +583,7 @@ export default {
     };
   },
 
- created() {
+  created() {
     if (this.$route.query.code) {
       this.setKakaoToken();
     }
@@ -597,6 +597,13 @@ export default {
       console.log(this.token);
     },
 
+    golunch() {
+      this.$router.push("/food");
+      console.log(this.name);
+      console.log(this.login_type);
+      console.log(this.token);
+    },
+
     // 카카오 로그아웃
     async btn_off() {
       vueCookies.keys().forEach((cookie) => vueCookies.remove(cookie));
@@ -604,7 +611,7 @@ export default {
         .post("https://kapi.kakao.com/v1/user/unlink", null, {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
-            Authorization: "Bearer " +  this.token,
+            Authorization: "Bearer " + this.token,
           },
         })
         .then((res) => {
