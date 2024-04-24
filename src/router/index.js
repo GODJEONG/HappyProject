@@ -32,6 +32,11 @@ const routes = [
     name: 'kakaoinfo',
     component: () => import(/* webpackChunkName: "about" */ '../views/kakaoinfo.vue')
   },
+  {
+    path: '/roll',
+    name: 'roll',
+    component: () => import(/* webpackChunkName: "about" */ '../views/rollpage.vue')
+  },
 
 ]
 
