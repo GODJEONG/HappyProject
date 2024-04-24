@@ -3,9 +3,10 @@
     <router-link to="/">login</router-link> |
     <router-link to="/mainpage">mainpage</router-link> |
     <router-link to="/manitto">manitto</router-link> |
+     <router-link to="/food">food</router-link>
   </nav> -->
 
-  <router-view /> 
+  <router-view />
 </template>
 
 <style>

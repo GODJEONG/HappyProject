@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/loginpage.vue'
+import food from '../views/FoodView.vue'
 
 const routes = [
   {
