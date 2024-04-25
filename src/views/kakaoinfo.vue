@@ -65,7 +65,8 @@ export default {
           console.log(res.data.properties.nickname);
           console.log(res.data.properties.profile_image);
           this.kakaologin_status(res.data.properties.nickname);
-
+          this.$store.commit("img", res.data.properties.profile_image);
+          console.log(this.$store.getters.getimg);
           let obj = {};
           obj.name = res.data.properties.nickname;
           let url = "http://localhost:3000/kakaomembercheck";

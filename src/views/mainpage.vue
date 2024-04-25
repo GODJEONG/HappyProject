@@ -10,6 +10,21 @@
         class="relative max-w-[66rem] w-full bg-neutral-800 rounded-[28px] py-3 ps-5 pe-2 md:flex md:items-center md:justify-between md:py-0 mx-2 lg:mx-auto"
         aria-label="Global"
       >
+        <div v-if="login_type === '2'" class="shrink-0">
+          <a
+            :href= "img"
+            target="_blank"
+          >
+            <img
+              class="h-16 w-16 object-cover rounded-full"
+              :src="img"
+              alt="Current profile photo"
+            />
+          </a>
+         
+        </div>
+        &nbsp; 
+        <div class="w-96 text-white text-2xl">    {{name}} 님 환영합니다!  </div>
         <div class="flex items-center justify-between">
           <!-- End Logo -->
 
@@ -469,8 +484,8 @@
       <!-- End Stats -->
 
       <!-- Contact -->
-      <div ref="scroll3"> </div>
-      <div  class="bg-neutral-900">
+      <div ref="scroll3"></div>
+      <div class="bg-neutral-900">
         <div class="max-w-5xl px-4 xl:px-0 py-10 lg:py-20 mx-auto">
           <!-- Title -->
 
@@ -595,6 +610,7 @@ export default {
       name: this.$store.getters.getlogin_info.name,
       login_type: this.$store.getters.getlogin_info.login_type,
       token: this.$store.getters.gettoken.token,
+      img: this.$store.getters.getimg,
     };
   },
 

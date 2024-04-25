@@ -4,7 +4,8 @@ import { createStore } from 'vuex'
 const store = createStore({
     state: {
         login_info: [],
-        token:[]
+        token:[],
+        img: [],
     },
     mutations: {
         create(state, obj) {
@@ -25,11 +26,21 @@ const store = createStore({
             console.log(state.login_info);
 
         },
+        img(state, obj) {
+            console.log(state);
+            console.log('============');
+            console.log(obj);
+
+            state.img.push(obj);
+
+            console.log(state.img);
+        },
 
         init(state) {
             console.log(state);
             console.log('============');
             state.login_info.pop();
+            state.img.pop();
 
             console.log(state.login_info);
 
@@ -59,6 +70,14 @@ const store = createStore({
                 return 1
             else {
                 return state.token[0]
+            }
+        },
+
+        getimg(state) {
+            if (state.img[0] == null)
+                return 1
+            else {
+                return state.img[0]
             }
         },
     }
