@@ -65,20 +65,28 @@
             class="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-end md:gap-y-0 md:gap-x-7 md:mt-0 md:ps-7"
           >
             <a
+              @click="scrollToPosition(0)"
               class="text-sm text-white hover:text-neutral-300 md:py-4 focus:outline-none focus:text-neutral-300"
-              href="../../templates/agency/index.html"
               aria-current="page"
-              >Home</a
+              >Top</a
             >
             <a
+              @click="scrollToPosition(1)"
               class="text-sm text-white hover:text-neutral-300 md:py-4 focus:outline-none focus:text-neutral-300"
-              href="#"
-              >Contents</a
+              aria-current="page"
+              >Content</a
             >
             <a
+              @click="scrollToPosition(2)"
               class="text-sm text-white hover:text-neutral-300 md:py-4 focus:outline-none focus:text-neutral-300"
               href="#"
-              >Games</a
+              >Game</a
+            >
+            <a
+              @click="scrollToPosition(3)"
+              class="text-sm text-white hover:text-neutral-300 md:py-4 focus:outline-none focus:text-neutral-300"
+              href="#"
+              >Contact</a
             >
 
             <div>
@@ -99,7 +107,7 @@
 
     <main id="content" class="mt-0">
       <!-- Hero -->
-      <div class="bg-neutral-900">
+      <div ref="scroll0" class="bg-neutral-900">
         <div class="max-w-6xl mx-auto px-4 xl:px-0 pt-24 lg:pt-32 pb-24">
           <h1 class="font-semibold text-white text-5xl md:text-6xl pl-16">
             <span class="text-[#ff0]">Welcome to DIGI Game World</span> <br />
@@ -121,7 +129,10 @@
       <!-- End Hero -->
 
       <!-- Case Stories -->
-      <div class="bg-neutral-900 bg-gradient-to-t from-black to-transparent">
+      <div
+        ref="scroll1"
+        class="bg-neutral-900 bg-gradient-to-t from-black to-transparent"
+      >
         <div class="max-w-5xl px-4 xl:px-0 py-24 mx-auto">
           <!-- Title -->
           <div class="max-w-5xl mb-10 lg:mb-14 pl-8">
@@ -220,6 +231,7 @@
 
             <!-- Card -->
             <a
+              @click="gorolling()"
               class="group relative z-10 p-4 md:p-6 h-full flex flex-col bg-neutral-900 first:rounded-t-xl last:rounded-b-xl lg:first:rounded-l-xl lg:first:rounded-tr-none lg:last:rounded-r-xl lg:last:rounded-bl-none before:absolute before:inset-0 before:bg-gradient-to-b before:hover:from-transparent before:hover:via-transparent before:hover:to-[#ff0]/10 before:via-80% before:-z-[1] before:last:rounded-b-xl lg:before:first:rounded-s-xl lg:before:last:rounded-e-xl lg:before:last:rounded-bl-none before:opacity-0 before:hover:opacity-100"
               href="#"
             >
@@ -262,6 +274,7 @@
       <!-- End Case Stories -->
 
       <!-- Testimonials -->
+      <div ref="scroll2"></div>
       <div class="bg-neutral-900">
         <div class="max-w-5xl px-4 xl:px-0 py-10 lg:py-20 mx-auto">
           <!-- Title -->
@@ -276,6 +289,7 @@
               <br />Here are three products with the best performance.
             </p>
           </div>
+
           <!-- End Title -->
 
           <!-- Grid -->
@@ -455,7 +469,8 @@
       <!-- End Stats -->
 
       <!-- Contact -->
-      <div class="bg-neutral-900">
+      <div ref="scroll3"> </div>
+      <div  class="bg-neutral-900">
         <div class="max-w-5xl px-4 xl:px-0 py-10 lg:py-20 mx-auto">
           <!-- Title -->
 
@@ -596,12 +611,35 @@ export default {
       console.log(this.login_type);
       console.log(this.token);
     },
+    gorolling() {
+      this.$router.push("/roll1");
+      console.log(this.name);
+      console.log(this.login_type);
+      console.log(this.token);
+    },
 
     golunch() {
       this.$router.push("/food");
       console.log(this.name);
       console.log(this.login_type);
       console.log(this.token);
+    },
+
+    scrollToPosition(position) {
+      // position에 따라 스크롤할 요소를 정의
+      let targetRef;
+      if (position === 0) {
+        targetRef = this.$refs.scroll0;
+      } else if (position === 1) {
+        targetRef = this.$refs.scroll1;
+      } else if (position === 2) {
+        targetRef = this.$refs.scroll2;
+      } else if (position === 3) {
+        targetRef = this.$refs.scroll3;
+      }
+
+      // 해당 요소로 스크롤
+      targetRef.scrollIntoView({ behavior: "smooth", block: "start" });
     },
 
     // 카카오 로그아웃

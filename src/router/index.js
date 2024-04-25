@@ -34,11 +34,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/kakaoinfo.vue')
   },
   {
-    path: '/roll',
-    name: 'roll',
-    component: () => import(/* webpackChunkName: "about" */ '../views/rollpage.vue')
-  },
-  {
     path: '/food',
     name: 'food',
     component: () => import(/* webpackChunkName: "about" */ '../views/FoodView.vue')
@@ -48,6 +43,17 @@ const routes = [
     name: 'CheckGame',
     component: () => import(/* webpackChunkName: "about" */ '../views/CheckGame.vue')
   },
+  {
+    path: '/roll1',
+    name: 'roll1',
+    component: () => import(/* webpackChunkName: "about" */ '../views/rolling_key.vue')
+  },
+  {
+    path: '/roll2',
+    name: 'roll2',
+    component: () => import(/* webpackChunkName: "about" */ '../views/rolling_register.vue')
+  },
+
   // {
   //   path: '/youtube',
   //   name: 'youtube',

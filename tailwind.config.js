@@ -9,6 +9,8 @@ module.exports = {
       backgroundImage: {
         bg1: "url('@/assets/background1.jpg')",
         bg2: "url('@/assets/background2.jpg')",
+        lg: "url('@/assets/login.jpg')",
+
         christmas1: "url('@/assets/christmas1.jpg')",
         christmas2: "url('@/assets/christmas2.jpg')"
       },

@@ -1,5 +1,5 @@
 <template>
-  <section class="relative z-0 bg-cover bg-center bg-no-repeat bg-bg1">
+  <section class="relative z-0 bg-cover bg-center bg-no-repeat bg-lg">
     <div
       class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
     >
@@ -50,12 +50,12 @@
               <div class="flex items-start">
                 <div class="ml-3 text-sm"></div>
               </div>
-              <a
+              <!-- <a
                 @click="findpw()"
                 href="#"
                 class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
                 >Forgot password?</a
-              >
+              > -->
             </div>
 
             <button
