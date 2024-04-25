@@ -1,5 +1,14 @@
 <template>
   <div class="app-container">
+    <div class="relative">
+      <img
+        @click="gohome()"
+        src="@/assets/home.png"
+        class="max-w-4xl transition-transform duration-300 transform hover:scale-110 absolute right-3 mt-4 mr-8"
+        style="max-width: 70px; z-index: 3"
+      />
+    </div>
+
     <h1
       class="box-content h-28 flex items-center justify-center box-decoration-slice bg-gradient-to-r from-yellow-400 to-yellow-300 text-white px-2 px-4 text-6xl drop-shadow-lg mb-12"
     >
@@ -35,7 +44,7 @@
       오늘 점심은? &nbsp;&nbsp;&nbsp;
     </h2>
     <button
-      class="border-double border-4 border-yellow-600 text-5xl text-slate-100 bg-amber-600 rounded-full mb-8 drop-shadow-lg"
+      class="border-double border-4 border-yellow-600 text-5xl text-slate-100 bg-amber-600 rounded-full mb-8 drop-shadow-lg hover:scale-110"
       @click="random"
     >
       &nbsp;랜덤추천 Click!&nbsp;
@@ -470,6 +479,7 @@ export default {
             position: markerPositions[i].latlng, // 마커를 표시할 위치
             title: markerPositions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
             image: markerImage, // 마커 이미지
+            class: "hover:scale-110",
           });
 
           // 마커를 리스트에 추가합니다
@@ -597,6 +607,9 @@ export default {
           console.log(res.data); //
           this.like = res;
         });
+    },
+    gohome() {
+      this.$router.push("/mainpage");
     },
   },
   watch: {
