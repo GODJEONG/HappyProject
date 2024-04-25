@@ -764,4 +764,5 @@ export default {
   font-family: 국민연금체, Yeongdeok Snow Crab;
   font-weight: bold;
 }
+
 </style>

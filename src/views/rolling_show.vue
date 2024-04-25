@@ -4,10 +4,20 @@
   <img alt="bg_img" src="@/assets/roll/back5.png" class="bg" />
 
   <!-- 뒤로가기 이미지 버튼 -->
-  <router-link to="/roll1" class="decoBack">
+  <!-- <router-link to="/roll1" class="decoBack">
     <img src="@/assets/roll/back.png" />
-  </router-link>
+  </router-link> -->
+  
+ <div class="relative">
+    <img
+      @click="gohome()"
+      src="@/assets/home.png"
+      class="max-w-4xl transition-transform duration-300 transform hover:scale-110 absolute right-3 mt-4 mr-8"
+      style="max-width: 70px; z-index: 3"
+    />
+  </div>
 
+<div class="total">
   <div class="content">
     <div class="title">{{ name }} 님에게</div>
     <div class="title">도착한 메세지!</div>
@@ -69,6 +79,7 @@
       <button class="popupButton" @click="closeMemo">닫기</button>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -104,6 +115,9 @@ export default {
     this.getrollpaper();
   },
   methods: {
+    gohome() {
+      this.$router.push("/roll1");
+    },
 
     showMemo(key) {
       this.key = key;
@@ -172,7 +186,8 @@ export default {
 
 
 <style>
-#app {
+
+.total {
   position: relative;
   width: 100vw;
   height: 100vh;

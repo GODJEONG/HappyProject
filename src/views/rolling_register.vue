@@ -1,13 +1,17 @@
 <template>
-  <div id="app">
-    <!-- 배경 이미지 -->
-    <img alt="bg_img" src="@/assets/roll/back5.png" class="bg" />
+  <!-- 배경 이미지 -->
+  <img alt="bg_img" src="@/assets/roll/back5.png" class="bg" />
 
-    <!-- 뒤로가기 이미지 버튼 -->
-    <router-link to="/roll1" class="decoBack">
-      <img src="@/assets/roll/back.png" />
-    </router-link>
+  <div class="relative">
+    <img
+      @click="gohome()"
+      src="@/assets/home.png"
+      class="max-w-4xl transition-transform duration-300 transform hover:scale-110 absolute right-3 mt-4 mr-8"
+      style="max-width: 70px; z-index: 3"
+    />
+  </div>
 
+  <div class="boxx">
     <!-- 입력 창1 -->
     <div v-if="showFrame1" class="basicFrame">
       <img
@@ -205,12 +209,9 @@
         To {{ clickName }} <br />
         메시지<br />
         {{ memo_text }}
-        <br>
+        <br />
         <div class="flex items-center justify-center w-24 h-24">
-        <img
-          :src="require(`@/assets/roll/${img_choice}.png`)"
-          alt="이미지"
-        />
+          <img :src="require(`@/assets/roll/${img_choice}.png`)" alt="이미지" />
         </div>
       </div>
     </div>
@@ -223,8 +224,7 @@ export default {
   name: "App",
   data() {
     return {
-
-      memos: [],  
+      memos: [],
       showFrame1: true,
       showFrame2: false,
       showFrame3: false,
@@ -256,11 +256,13 @@ export default {
     searchName() {},
     memo_text() {},
     img_choice() {},
-    
   },
-  created(){
-  },
+  created() {},
   methods: {
+    gohome() {
+      this.$router.push("/roll1");
+    },
+
     search() {
       if (this.searchName === "" || this.searchName == null) {
         this.searchall();
@@ -303,7 +305,7 @@ export default {
         });
     },
 
-      getrollpaper() {
+    getrollpaper() {
       let obj = {};
       obj.name = this.clickName;
       let url = "http://localhost:3000/getrollpaper";
@@ -450,7 +452,7 @@ export default {
 </script>
 
 <style>
-#app {
+.boxx {
   position: relative;
   width: 100vw;
   height: 100vh;

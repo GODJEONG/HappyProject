@@ -18,6 +18,8 @@
     </div>
 
     <!-- 입력 창 -->
+
+    <div class="boxx">
     <div class="input-container">
       <div class="input-title">
         <p>내 열차<br />보러가기</p>
@@ -25,6 +27,16 @@
           <img src="@/assets/roll/go.png" />
         </router-link>
       </div>
+    </div>
+
+      <div class="input-container">
+      <div class="input-content">
+        <p>열차<br />꾸며주기</p>
+        <router-link to="/roll2" class="decoGo2">
+          <img src="@/assets/roll/go.png" />
+        </router-link>
+      </div>
+    </div>
     </div>
 
     <img
@@ -51,14 +63,7 @@
       "
     />
 
-    <div class="input-container">
-      <div class="input-content">
-        <p>열차<br />꾸며주기</p>
-        <router-link to="/roll2" class="decoGo2">
-          <img src="@/assets/roll/go.png" />
-        </router-link>
-      </div>
-    </div>
+  
   <!-- </div> -->
 </template>
 
@@ -78,7 +83,7 @@ export default {
 </script>
 
 <style>
-#app {
+.boxx {
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -91,8 +96,8 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 1000%;
+  height: 1000%;
   object-fit: cover;
   z-index: -1;
 }
