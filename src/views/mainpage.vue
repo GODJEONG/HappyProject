@@ -371,7 +371,7 @@
                 class="grid grid-cols-1 sm:grid-cols-3 items-center gap-y-20 gap-x-12"
               >
                 <!-- Stats -->
-                <div
+                <div @click="gogame()"
                   class="relative text-center first:before:hidden before:absolute before:-top-full sm:before:top-1/2 before:start-1/2 sm:before:-start-6 before:w-px before:h-20 before:bg-neutral-800 before:rotate-[60deg] sm:before:rotate-12 before:transform sm:before:-translate-y-1/2 before:-translate-x-1/2 sm:before:-translate-x-0 before:mt-3.5 sm:before:mt-0"
                 >
                   <svg
@@ -636,6 +636,13 @@ export default {
 
     golunch() {
       this.$router.push("/food");
+      console.log(this.name);
+      console.log(this.login_type);
+      console.log(this.token);
+    },
+
+     gogame() {
+      this.$router.push("/CheckGame");
       console.log(this.name);
       console.log(this.login_type);
       console.log(this.token);

@@ -53,6 +53,11 @@ const routes = [
     name: 'roll2',
     component: () => import(/* webpackChunkName: "about" */ '../views/rolling_register.vue')
   },
+  {
+    path: '/roll3',
+    name: 'roll3',
+    component: () => import(/* webpackChunkName: "about" */ '../views/rolling_show.vue')
+  },
 
   // {
   //   path: '/youtube',

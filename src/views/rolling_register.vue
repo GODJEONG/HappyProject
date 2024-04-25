@@ -86,21 +86,21 @@
         <div class="image-row">
           <img
             src="@/assets/roll/deco1.png"
-            v-if="!ribbon_status"
+            v-if="deco1_status"
             class="img_hover img-margin"
             @click="btn_choice('deco1')"
           />
           <!--리본-->
           <img
             src="@/assets/roll/deco2.png"
-            v-if="!party_status"
+            v-if="deco2_status"
             class="img_hover img-margin"
             @click="btn_choice('deco2')"
           />
           <!--폭죽-->
           <img
             src="@/assets/roll/deco6.png"
-            v-if="!party2_status"
+            v-if="deco6_status"
             class="img_hover img-margin"
             @click="btn_choice('deco6')"
           />
@@ -109,21 +109,21 @@
         <div class="image-row">
           <img
             src="@/assets/roll/deco5.png"
-            v-if="!msg_status"
+            v-if="deco5_status"
             class="img_hover img-margin"
             @click="btn_choice('deco5')"
           />
           <!--메세지-->
           <img
             src="@/assets/roll/deco3.png"
-            v-if="!headband_status"
+            v-if="deco3_status"
             class="img_hover img-margin"
             @click="btn_choice('deco3')"
           />
           <!--머리띠-->
           <img
             src="@/assets/roll/deco4.png"
-            v-if="!cake_status"
+            v-if="deco4_status"
             class="img_hover img-margin"
             @click="btn_choice('deco4')"
           />
@@ -132,21 +132,21 @@
         <div class="image-row">
           <img
             src="@/assets/roll/deco8.png"
-            v-if="!sunglasses_status"
+            v-if="deco8_status"
             class="img_hover img-margin"
             @click="btn_choice('deco8')"
           />
           <!--선글라스-->
           <img
             src="@/assets/roll/deco7.png"
-            v-if="!dog_status"
+            v-if="deco7_status"
             class="img_hover img-margin"
             @click="btn_choice('deco7')"
           />
           <!--강아지-->
           <img
             src="@/assets/roll/deco9.png"
-            v-if="!present_status"
+            v-if="deco9_status"
             class="img_hover img-margin"
             @click="btn_choice('deco9')"
           />
@@ -223,6 +223,8 @@ export default {
   name: "App",
   data() {
     return {
+
+      memos: [],  
       showFrame1: true,
       showFrame2: false,
       showFrame3: false,
@@ -239,21 +241,24 @@ export default {
       // memo_nick: '', // 입력된 닉네임
 
       // 선택된 이미지
-      ribbon_status: false,
-      party_status: false,
-      party2_status: false,
-      msg_status: false,
-      headband_status: false,
-      cake_status: false,
-      sunglasses_status: false,
-      dog_status: false,
-      present_status: false,
+      deco1_status: true,
+      deco2_status: true,
+      deco3_status: true,
+      deco4_status: true,
+      deco5_status: true,
+      deco6_status: true,
+      deco7_status: true,
+      deco8_status: true,
+      deco9_status: true,
     };
   },
   watch: {
     searchName() {},
     memo_text() {},
     img_choice() {},
+    
+  },
+  created(){
   },
   methods: {
     search() {
@@ -298,11 +303,46 @@ export default {
         });
     },
 
+      getrollpaper() {
+      let obj = {};
+      obj.name = this.clickName;
+      let url = "http://localhost:3000/getrollpaper";
+      axios
+        .get(url, {
+          params: obj,
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.data == null || res.data == "") {
+            console.log("메모가 없습니다!!");
+          } else {
+            this.memos = res.data;
+            console.log(this.memos);
+            console.log(this.memos[0]);
+            console.log(this.memos[0].img);
+
+            this.iconblind();
+          }
+        });
+    },
+
+    iconblind() {
+      for (let i = 0; i < this.memos.length; i++) {
+        console.log(this.memos.length);
+        let memoKey = `${this.memos[i].img}_status`;
+        console.log(memoKey);
+        this[memoKey] = false;
+        console.log(this.deco1_status);
+        console.log(this.deco2_status);
+      }
+    },
+
     clickSave(value) {
       // 클릭된 이름 저장
       this.clickName = value;
       console.log(this.clickName);
       alert(this.clickName + "님을 선택했습니다!");
+      this.getrollpaper();
     },
     btn_choice(img) {
       alert("이모티콘이 선택되었습니다");
