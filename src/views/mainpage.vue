@@ -1,37 +1,33 @@
 <template>
   <!-- 메뉴 ----------------------------------------------------------------------------------->
-  <body class="bg-neutral-900">
+  <body class="bg-orange-100/50">
     <br />
     <br />
     <header
       class="sticky top-4 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full"
     >
       <nav
-        class="relative max-w-[66rem] w-full bg-neutral-800 rounded-[28px] py-3 ps-5 pe-2 md:flex md:items-center md:justify-between md:py-0 mx-2 lg:mx-auto"
+        class="relative max-w-[66rem] w-full bg-green-800/80 rounded-[28px] py-3 ps-5 pe-2 md:flex md:items-center md:justify-between md:py-0 mx-2 lg:mx-auto"
         aria-label="Global"
       >
         <div v-if="login_type === '2'" class="shrink-0">
-          <a
-            :href= "img"
-            target="_blank"
-          >
+          <a :href="img" target="_blank">
             <img
               class="h-16 w-16 object-cover rounded-full"
               :src="img"
               alt="Current profile photo"
             />
           </a>
-         
         </div>
-        &nbsp; 
-        <div class="w-96 text-white text-2xl">    {{name}} 님 환영합니다!  </div>
+        &nbsp;
+        <div class="w-96 text-white text-2xl">{{ name }} 님 환영합니다!</div>
         <div class="flex items-center justify-between">
           <!-- End Logo -->
 
           <div class="md:hidden">
             <button
               type="button"
-              class="hs-collapse-toggle size-8 flex justify-center items-center text-sm font-semibold rounded-full bg-neutral-800 text-white disabled:opacity-50 disabled:pointer-events-none"
+              class="hs-collapse-toggle size-8 flex justify-center items-center text-sm font-semibold rounded-full bg-orange-100/50 text-white disabled:opacity-50 disabled:pointer-events-none"
               data-hs-collapse="#navbar-collapse"
               aria-controls="navbar-collapse"
               aria-label="Toggle navigation"
@@ -122,21 +118,25 @@
 
     <main id="content" class="mt-0">
       <!-- Hero -->
-      <div ref="scroll0" class="bg-neutral-900">
+      <div ref="scroll0" class="bg-orange-100/50 border-1">
         <div class="max-w-6xl mx-auto px-4 xl:px-0 pt-24 lg:pt-32 pb-24">
           <h1 class="font-semibold text-white text-5xl md:text-6xl pl-16">
-            <span class="text-[#ff0]">Welcome to DIGI Game World</span> <br />
-            <p class="text-4xl md:text-5xl">
+            <br /><br /><br />
+            <span class="text-[#FACC2E] drop-shadow-sm"
+              >Welcome to DIGI Land</span
+            >
+            <br /><br />
+            <p class="text-4xl md:text-5xl text-green-800/70 drop-shadow-sm">
               Power contents & Crazy performance game
             </p>
           </h1>
           <div class="max-w-6xl pl-20">
             <p class="mt-3 text-neutral-400 text-xl">
-              DIGI game world is the first website created by three novice
-              developers, day and night.<br />
+              DIGI Land is the first website created by three novice developers,
+              day and night.<br />
               We don't know why it works, so we don't take questions about games
               and content. <br />
-              Thanks to chat GPT and Google.
+              Thanks to chat GPT and Google and 미스터 명.
             </p>
           </div>
         </div>
@@ -144,19 +144,17 @@
       <!-- End Hero -->
 
       <!-- Case Stories -->
-      <div
-        ref="scroll1"
-        class="bg-neutral-900 bg-gradient-to-t from-black to-transparent"
-      >
+      <div ref="scroll1" class="bg-orange-100/50">
+        <br /><br /><br /><br /><br /><br /><br />
         <div class="max-w-5xl px-4 xl:px-0 py-24 mx-auto">
           <!-- Title -->
           <div class="max-w-5xl mb-10 lg:mb-14 pl-8">
             <h2
-              class="text-white font-semibold text-2xl md:text-4xl md:leading-tight"
+              class="text-white font-semibold text-2xl md:text-4xl md:leading-tight text-rose-900/60"
             >
               Power Contents
             </h2>
-            <p class="mt-1 text-neutral-400 text-xl">
+            <p class="mt-1 text-neutral-500 text-xl">
               Experience great work that stimulates users' emotions and recharge
               their energy! <br />Here are three products with the best
               performance.
@@ -171,7 +169,7 @@
             <!-- Card -->
             <a
               @click="gomanitto()"
-              class="group relative z-10 p-4 md:p-6 h-full flex flex-col bg-neutral-900 first:rounded-t-xl last:rounded-b-xl lg:first:rounded-l-xl lg:first:rounded-tr-none lg:last:rounded-r-xl lg:last:rounded-bl-none before:absolute before:inset-0 before:bg-gradient-to-b before:hover:from-transparent before:hover:via-transparent before:hover:to-[#ff0]/10 before:via-80% before:-z-[1] before:last:rounded-b-xl lg:before:first:rounded-s-xl lg:before:last:rounded-e-xl lg:before:last:rounded-bl-none before:opacity-0 before:hover:opacity-100"
+              class="group relative z-10 p-4 md:p-6 h-full flex flex-col bg-rose-800/30 first:rounded-t-xl last:rounded-b-xl lg:first:rounded-l-xl lg:first:rounded-tr-none lg:last:rounded-r-xl lg:last:rounded-bl-none before:absolute before:inset-0 before:bg-gradient-to-b before:hover:from-transparent before:hover:via-transparent before:hover:to-[#ff0]/10 before:via-80% before:-z-[1] before:last:rounded-b-xl lg:before:first:rounded-s-xl lg:before:last:rounded-e-xl lg:before:last:rounded-bl-none before:opacity-0 before:hover:opacity-100"
               href="#"
             >
               <div class="mb-5">
@@ -189,16 +187,16 @@
                   <h3 class="mt-5 font-medium text-lg text-white">
                     Together makes Happier
                   </h3>
-                  <p class="mt-1 text-neutral-400">
-                    다른 사람에게 즐거움을 주는 것은 나 자신 또한 행복해지는
-                    방법입니다. Manito Santa를 통해 즐거움을 함께 공유하고 더욱
-                    가까운 관계를 만들어 보세요.
+                  <p class="mt-1 text-neutral-600">
+                    다른 사람에게 즐거움을 주는 것은 <br />나 자신 또한
+                    행복해지는 방법입니다. Manito Santa를 통해 즐거움을 함께
+                    <br />공유하고 더욱 가까운 관계를 만들어 보세요.
                   </p>
                 </div>
               </div>
               <p class="mt-auto">
                 <span
-                  class="font-medium text-sm text-[#ff0] pb-1 border-b-2 border-neutral-700 group-hover:border-[#ff0] transition focus:outline-none group-focus:border-[#ff0]"
+                  class="font-medium text-sm text-white pb-1 border-b-2 border-neutral-700 group-hover:border-[#ff0] transition focus:outline-none group-focus:border-[#ff0]"
                 >
                   Go Start
                 </span>
@@ -209,7 +207,7 @@
             <!-- Card -->
             <a
               @click="golunch()"
-              class="group relative z-10 p-4 md:p-6 h-full flex flex-col bg-neutral-900 first:rounded-t-xl last:rounded-b-xl lg:first:rounded-l-xl lg:first:rounded-tr-none lg:last:rounded-r-xl lg:last:rounded-bl-none before:absolute before:inset-0 before:bg-gradient-to-b before:hover:from-transparent before:hover:via-transparent before:hover:to-[#ff0]/10 before:via-80% before:-z-[1] before:last:rounded-b-xl lg:before:first:rounded-s-xl lg:before:last:rounded-e-xl lg:before:last:rounded-bl-none before:opacity-0 before:hover:opacity-100"
+              class="group relative z-10 p-4 md:p-6 h-full flex flex-col bg-rose-800/30 first:rounded-t-xl last:rounded-b-xl lg:first:rounded-l-xl lg:first:rounded-tr-none lg:last:rounded-r-xl lg:last:rounded-bl-none before:absolute before:inset-0 before:bg-gradient-to-b before:hover:from-transparent before:hover:via-transparent before:hover:to-[#ff0]/10 before:via-80% before:-z-[1] before:last:rounded-b-xl lg:before:first:rounded-s-xl lg:before:last:rounded-e-xl lg:before:last:rounded-bl-none before:opacity-0 before:hover:opacity-100"
               href="#"
             >
               <div class="mb-5">
@@ -227,16 +225,17 @@
                   <h3 class="mt-16 font-medium text-lg text-white">
                     Lunch menu is problem..
                   </h3>
-                  <p class="mt-1 text-neutral-400">
+                  <p class="mt-1 text-neutral-600">
                     인류 최대의 난제, '오늘 점심 뭐먹지?' <br />
-                    Jummechu는 빅데이터 시대에 적합한 점심 메뉴 데이터베이스를
-                    바탕으로 사용자에게 최고의 점심 메뉴를 추천합니다.
+                    Jummechu는 빅데이터 시대에 적합한 <br />점심 메뉴
+                    데이터베이스를 바탕으로 <br />사용자에게 최고의 점심 메뉴를
+                    추천합니다.
                   </p>
                 </div>
               </div>
               <p class="mt-auto">
                 <span
-                  class="font-medium text-sm text-[#ff0] pb-1 border-b-2 border-neutral-700 group-hover:border-[#ff0] transition focus:outline-none group-focus:border-[#ff0]"
+                  class="font-medium text-sm text-white pb-1 border-b-2 border-neutral-700 group-hover:border-[#ff0] transition focus:outline-none group-focus:border-[#ff0]"
                 >
                   Go Start
                 </span>
@@ -247,7 +246,7 @@
             <!-- Card -->
             <a
               @click="gorolling()"
-              class="group relative z-10 p-4 md:p-6 h-full flex flex-col bg-neutral-900 first:rounded-t-xl last:rounded-b-xl lg:first:rounded-l-xl lg:first:rounded-tr-none lg:last:rounded-r-xl lg:last:rounded-bl-none before:absolute before:inset-0 before:bg-gradient-to-b before:hover:from-transparent before:hover:via-transparent before:hover:to-[#ff0]/10 before:via-80% before:-z-[1] before:last:rounded-b-xl lg:before:first:rounded-s-xl lg:before:last:rounded-e-xl lg:before:last:rounded-bl-none before:opacity-0 before:hover:opacity-100"
+              class="group relative z-10 p-4 md:p-6 h-full flex flex-col bg-rose-800/30 first:rounded-t-xl last:rounded-b-xl lg:first:rounded-l-xl lg:first:rounded-tr-none lg:last:rounded-r-xl lg:last:rounded-bl-none before:absolute before:inset-0 before:bg-gradient-to-b before:hover:from-transparent before:hover:via-transparent before:hover:to-[#ff0]/10 before:via-80% before:-z-[1] before:last:rounded-b-xl lg:before:first:rounded-s-xl lg:before:last:rounded-e-xl lg:before:last:rounded-bl-none before:opacity-0 before:hover:opacity-100"
               href="#"
             >
               <div class="mb-5">
@@ -265,9 +264,10 @@
                   <h3 class="mt-6 font-medium text-lg text-white">
                     Can you feel my heartbeat?
                   </h3>
-                  <p class="mt-1 text-neutral-400">
+                  <p class="mt-1 text-neutral-600">
                     마음을 전하는 것은 언제나 즐거운 일입니다. Rolling Paper을
-                    통해 소중한 사람에게 평소 하고 싶었던 말을 전해보세요.
+                    통해 소중한 사람에게<br />
+                    평소 하고 싶었던 말을 전해보세요.
                     <br />
                     상대방 모습이 벌써 행복해 보이네요!
                   </p>
@@ -275,7 +275,7 @@
               </div>
               <p class="mt-auto">
                 <span
-                  class="font-medium text-sm text-[#ff0] pb-1 border-b-2 border-neutral-700 group-hover:border-[#ff0] transition focus:outline-none group-focus:border-[#ff0]"
+                  class="font-medium text-sm text-white pb-1 border-b-2 border-neutral-700 group-hover:border-[#ff0] transition focus:outline-none group-focus:border-[#ff0]"
                 >
                   Go Start
                 </span>
@@ -285,23 +285,25 @@
           </div>
           <!-- End Card Grid -->
         </div>
+        <br /><br /><br /><br /><br /><br />
       </div>
+
       <!-- End Case Stories -->
 
       <!-- Testimonials -->
       <div ref="scroll2"></div>
-      <div class="bg-neutral-900">
+      <div class="bg-orange-100/70">
         <div class="max-w-5xl px-4 xl:px-0 py-10 lg:py-20 mx-auto">
           <!-- Title -->
           <div class="max-w-5xl mb-10 lg:mb-14 pl-8">
             <h2
-              class="text-white font-semibold text-4xl md:text-5xl md:leading-tight"
+              class="text-green-800/70 font-semibold text-4xl md:text-5xl md:leading-tight"
             >
               Crazy Performance Game
             </h2>
-            <p class="mt-1 text-neutral-400 text-2xl">
+            <p class="mt-1 text-neutral-500 text-2xl">
               I don't understand why this is working..
-              <br />Here are three products with the best performance.
+              <br />Here are only one products with the best performance.
             </p>
           </div>
 
@@ -315,7 +317,7 @@
               <!-- Blockquote -->
               <blockquote>
                 <p
-                  class="font-medium text-xl text-white md:text-2xl md:leading-normal xl:text-3xl xl:leading-normal"
+                  class="font-medium text-xl text-neutral-600 md:text-2xl md:leading-normal xl:text-3xl xl:leading-normal"
                 >
                   게임을 잘해서 프로가 아닙니다.<br />
                   강한 정신력을 가지고 있기 때문에, <br />
@@ -332,7 +334,7 @@
                       />
                     </div>
                     <div class="ms-4 md:ms-0">
-                      <div class="text-base font-semibold text-white">
+                      <div class="text-base font-semibold text-neutral-400">
                         Faker
                       </div>
                       <div class="text-xs text-neutral-400">
@@ -349,7 +351,7 @@
             <div class="hidden md:block mb-24 md:mb-0">
               <img
                 class="rounded-xl"
-                src="@/assets/banner_game1.jpg"
+                src="@/assets/gamemain2.jpg"
                 alt="Image Description"
               />
             </div>
@@ -361,11 +363,11 @@
       <!-- End Testimonials -->
 
       <!-- Stats -->
-      <div class="bg-neutral-900">
+      <div class="bg-orange-100/50">
         <div class="max-w-5xl px-4 xl:px-0 py-10 mx-auto">
           <div class="border border-neutral-800 rounded-xl">
             <div
-              class="p-4 lg:p-8 bg-gradient-to-bl from-neutral-800 via-neutral-900 to-neutral-950 rounded-xl"
+              class="p-4 lg:p-8 bg-gradient-to-bl from-rose-700/30 via-rose-750/30 to-rose-800/30 rounded-xl"
             >
               <div
                 class="grid grid-cols-1 sm:grid-cols-3 items-center gap-y-20 gap-x-12"
@@ -398,8 +400,8 @@
                     <h3 class="text-lg sm:text-3xl font-semibold text-white">
                       GAME1
                     </h3>
-                    <p class="mt-1 text-sm sm:text-base text-neutral-400">
-                      game1 status
+                    <p class="mt-1 text-sm sm:text-base text-neutral-600">
+                      "빨리 클릭하기" 게임
                     </p>
                   </div>
                 </div>
@@ -433,8 +435,8 @@
                     <h3 class="text-lg sm:text-3xl font-semibold text-white">
                       GAME2
                     </h3>
-                    <p class="mt-1 text-sm sm:text-base text-neutral-400">
-                      game2 status
+                    <p class="mt-1 text-sm sm:text-base text-neutral-600">
+                      coming soon..
                     </p>
                   </div>
                 </div>
@@ -470,34 +472,40 @@
                     <h3 class="text-lg sm:text-3xl font-semibold text-white">
                       GAME3
                     </h3>
-                    <p class="mt-1 text-sm sm:text-base text-neutral-400">
-                      game3 status
+                    <p class="mt-1 text-sm sm:text-base text-neutral-600">
+                      coming soon..
                     </p>
                   </div>
                 </div>
+
                 <!-- End Stats -->
               </div>
             </div>
           </div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br /><br /><br /><br /><br /><br /><br /><br />
         </div>
       </div>
       <!-- End Stats -->
 
       <!-- Contact -->
       <div ref="scroll3"></div>
-      <div class="bg-neutral-900">
+      <div class="bg-orange-400/20">
         <div class="max-w-5xl px-4 xl:px-0 py-10 lg:py-20 mx-auto">
           <!-- Title -->
 
           <div class="max-w-5xl mb-10 lg:mb-14 pl-8">
             <h2
-              class="text-white font-semibold text-4xl md:text-5xl md:leading-tight"
+              class="text-green-800/70 font-semibold text-4xl md:text-5xl md:leading-tight"
             >
               Contact us
             </h2>
-            <p class="mt-1 text-neutral-400 text-2xl">
-              DIGI Game World 관련 궁금한 점이 있다면, 언제든지 편하게
-              연락해주세요.
+            <p class="mt-1 text-neutral-600 text-2xl">
+              DIGI Land 관련 궁금한 점이 있다면, 언제든지 편하게 연락해주세요.
             </p>
           </div>
           <!-- End Title -->
@@ -507,7 +515,7 @@
             <!-- Item -->
             <div class="flex gap-x-5">
               <svg
-                class="flex-shrink-0 size-10 text-neutral-500"
+                class="flex-shrink-0 size-10 text-neutral-600"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -522,9 +530,11 @@
                 <circle cx="12" cy="10" r="3"></circle>
               </svg>
               <div class="grow w-96">
-                <h4 class="text-white font-semibold text-2xl">Our address</h4>
+                <h4 class="text-green-800/70 font-semibold text-2xl">
+                  Our address
+                </h4>
 
-                <address class="mt-1 text-neutral-400 text-xl not-italic">
+                <address class="mt-1 text-neutral-600 text-xl not-italic">
                   33, Seocho-daero 74-gil Seocho-gu, Seoul Republic of Korea
                 </address>
               </div>
@@ -534,7 +544,7 @@
             <!-- Item -->
             <div class="flex gap-x-5">
               <svg
-                class="flex-shrink-0 size-10 text-neutral-500"
+                class="flex-shrink-0 size-10 text-neutral-600"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -551,14 +561,16 @@
                 <path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10"></path>
               </svg>
               <div class="grow">
-                <h4 class="text-white font-semibold text-2xl">Email us</h4>
+                <h4 class="text-green-800/70 font-semibold text-2xl">
+                  Email us
+                </h4>
 
                 <a
-                  class="mt-1 text-neutral-400 text-xl"
+                  class="mt-1 text-neutral-600 text-xl"
                   href="#mailto:example@site.co"
                   target="_blank"
                 >
-                  sjung8009@kbfg.com
+                  digiLand@kbfg.com
                 </a>
               </div>
             </div>
@@ -567,7 +579,7 @@
             <!-- Item -->
             <div class="flex gap-x-5">
               <svg
-                class="flex-shrink-0 size-10 text-neutral-500"
+                class="flex-shrink-0 size-10 text-neutral-600"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -582,18 +594,23 @@
                 <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path>
               </svg>
               <div class="grow">
-                <h4 class="text-white font-semibold text-2xl">Information</h4>
-                <p class="mt-1 text-neutral-400 text-xl">
+                <h4 class="text-green-800/70 font-semibold text-2xl">
+                  Information
+                </h4>
+                <p class="mt-1 text-neutral-600 text-xl">
                   위 사이트는 DIGI Campus 연수생 산출물로서, 교육용으로 활용
                   예정입니다.
                 </p>
               </div>
             </div>
+
             <!-- End Item -->
           </div>
+
           <!-- End Col -->
         </div>
       </div>
+      <br /><br /><br /><br /><br /><br />
       <!-- End Contact -->
     </main>
   </body>
@@ -742,3 +759,9 @@ export default {
   },
 };
 </script>
+<style>
+* {
+  font-family: 국민연금체, Yeongdeok Snow Crab;
+  font-weight: bold;
+}
+</style>
