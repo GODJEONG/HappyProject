@@ -43,7 +43,16 @@ const routes = [
     name: 'food',
     component: () => import(/* webpackChunkName: "about" */ '../views/FoodView.vue')
   },
-
+  {
+    path: '/CheckGame',
+    name: 'CheckGame',
+    component: () => import(/* webpackChunkName: "about" */ '../views/CheckGame.vue')
+  },
+  // {
+  //   path: '/youtube',
+  //   name: 'youtube',
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/youtube.vue')
+  // },
 ]
 
 const router = createRouter({

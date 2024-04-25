@@ -4,7 +4,6 @@ import router from './router'
 import store from '@/store/data'
 import './styles.css';
 
-
 createApp(App)
 .use(router)
 .use(store)
