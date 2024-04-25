@@ -659,7 +659,7 @@ export default {
 
 <style>
 * {
-  font-family: Cafe24 ssurround, 나눔스퀘어라운드, 에스코어 드림;
+  font-family: 국민연금체, 나눔스퀘어라운드, 에스코어 드림;
 }
 
 #map {
