@@ -620,6 +620,7 @@
 <script>
 import axios from "axios";
 import vueCookies from "vue-cookies";
+import Swal from "sweetalert2";
 
 export default {
   name: "App",
@@ -694,7 +695,7 @@ export default {
           },
         })
         .then((res) => {
-          alert("성공");
+          Swal.fire("알림!", "로그아웃 되었습니다.", "");
           console.log(res);
           this.$router.push("/");
         });
@@ -708,9 +709,11 @@ export default {
       }
 
       window.Kakao.Auth.logout(function () {
+        Swal.fire("알림!", "로그아웃 되었습니다.", "");
         vueCookies.remove("access-token");
         vueCookies.remove("refresh-token");
         alert("로그아웃 되었습니다.", window.Kakao.Auth.getAccessToken());
+
         this.$router.push("/");
       });
     },
@@ -743,6 +746,7 @@ export default {
           })
           .then((res) => {
             console.log(res);
+            Swal.fire("알림!", "로그아웃 되었습니다.", "");
             this.$store.commit("init");
             this.$router.push("/");
           })

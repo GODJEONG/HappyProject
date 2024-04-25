@@ -197,7 +197,7 @@ export default {
           console.log(res.data);
           this.manitto = this.getRandomName(res.data); // 마니또 선별
           if (this.manitto === null) {
-            alert("매칭가능한 마니또가 없습니다!!");
+            Swal.fire("매칭가능한 마니또가 없습니다!!", "");
           } else {
             this.manitto_update();
             console.log(this.name);
@@ -268,7 +268,11 @@ export default {
         })
         .then((res) => {
           console.log(res);
-          alert(this.manitto + "에게 전달 완료");
+          Swal.fire({
+            title: this.manitto + "에게 전달 완료",
+            icon: "success",
+          });
+
           this.slackgo();
         });
     },

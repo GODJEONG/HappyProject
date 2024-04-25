@@ -7,8 +7,8 @@
         href="#"
         class="flex items-center mb-6 text-3xl font-semibold text-white dark:text-white"
       >
-        <img class="w-8 h-8 mr-2" src="@/assets/game1.png" alt="logo" />
-        Digi Game World
+        <img class="w-9 h-9 mr-2" src="@/assets/game1.png" alt="logo" />
+        <div class="text-5xl">Digi Land</div>
       </a>
       <div
         class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"
@@ -60,7 +60,7 @@
 
             <button
               @click="baselogin()"
-              class="mb-0 w-full h-12 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              class="mb-0 w-full h-12 text-white bg-red-400 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-red-800"
             >
               Sign in
             </button>
@@ -221,6 +221,7 @@
 <!-- <script> -->
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
   name: "App",
@@ -250,11 +251,12 @@ export default {
         .then((res) => {
           console.log(res.data);
           if (res.data.exists) {
-            alert("중복된 ID입니다.");
+            Swal.fire("알림!", "중복된 ID입니다.", "");
             this.id_result = false;
           } else {
             console.log("사용 가능한 ID입니다.");
-            alert("사용 가능한 ID입니다.");
+
+            Swal.fire("사용 가능한 ID입니다.", "");
             this.id_result = true;
           }
         })
@@ -275,11 +277,12 @@ export default {
         .then((res) => {
           console.log(res.data);
           if (!res.data.exists) {
-            alert("DIGI Campus 멤버가 아닙니다. 가입이 불가능합니다!");
+            Swal.fire("DIGI Campus 멤버가 아닙니다. 가입이 불가능합니다!", "");
             this.name_result = false;
           } else {
             console.log("DIGI Campus 멤버입니다.");
-            alert("DIGI Campus 멤버입니다. 가입 가능합니다!");
+
+            Swal.fire("DIGI Campus 멤버입니다. 가입 가능합니다!", "");
             this.name_result = true;
           }
         })
@@ -291,10 +294,11 @@ export default {
 
     pw_check() {
       if (this.pw == null || this.pw == "") {
-        alert("비밀번호를 입력해주세요");
+        Swal.fire("비밀번호를 입력해주세요.", "");
         return false;
       } else if (this.pw != this.pw2) {
-        alert("비밀번호가 일치하지 않습니다.");
+        Swal.fire("비밀번호가 일치하지 않습니다.", "");
+
         return false;
       } else return true;
     },
@@ -309,11 +313,11 @@ export default {
         return;
       }
       if (!this.id_result) {
-        alert("Check your ID again");
+        Swal.fire("ID를 다시 확인해주세요.", "");
         return;
       }
       if (!this.name_result) {
-        alert("Check your name again");
+        Swal.fire("이름을 다시 확인해주세요.", "");
         return;
       }
 
@@ -329,6 +333,7 @@ export default {
         .catch((error) => {
           // 요청 실패 시 에러 메시지 출력
           console.error("회원가입 요청에 실패했습니다:", error);
+          Swal.fire("회원가입 요청에 실패했습니다:", "");
         });
     },
 
@@ -372,7 +377,7 @@ export default {
           console.log(res);
 
           if ((res.data == "null") | (res.data == "")) {
-            alert("ID 혹은 PW가 다릅니다. 다시 입력해주세요");
+            Swal.fire("ID 혹은 PW가 다릅니다. 다시 입력해주세요:", "");
             return;
           } else {
             console.log(res);
@@ -407,3 +412,14 @@ export default {
   },
 };
 </script>
+<style>
+.swal2-popup .swal2-title,
+.swal2-popup .swal2-content,
+.swal2-popup .swal2-html-container {
+  font-size: 18px; /* 원하는 크기로 조절 */
+}
+
+* {
+  font-family: 국민연금체, 나눔스퀘어라운드, 에스코어 드림;
+}
+</style>

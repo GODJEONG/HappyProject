@@ -104,13 +104,12 @@ export default {
     this.getrollpaper();
   },
   methods: {
-
     showMemo(key) {
       this.key = key;
       console.log("showmemo");
       for (let i = 0; i < this.memos.length; i++) {
         console.log(this.memos[i].img);
-        console.log('key' + key);
+        console.log("key" + key);
         if (this.memos[i].img == key) {
           console.log(this.memos[i]);
           console.log(this.memos[i].contents);
@@ -170,8 +169,10 @@ export default {
 };
 </script>
 
-
 <style>
+* {
+  font-family: 국민연금체, 나눔스퀘어라운드, 에스코어 드림;
+}
 #app {
   position: relative;
   width: 100vw;

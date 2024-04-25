@@ -33,7 +33,14 @@
             placeholder="상대방 이름 입력"
             style="width: 300px; text-align: center"
           />
-          &nbsp; <button @click="search()">검색</button> <br /><br />
+          &nbsp;
+          <button
+            class="text-xm text-slate-100 bg-red-500/80 rounded-xl drop-shadow-lg"
+            @click="search()"
+          >
+            &nbsp;&nbsp;검색&nbsp;&nbsp;
+          </button>
+          <br /><br />
 
           <!-- 검색 결과를 출력할 부분 -->
           <div v-if="searchResult.length > 0" class="searchBox">
@@ -205,12 +212,9 @@
         To {{ clickName }} <br />
         메시지<br />
         {{ memo_text }}
-        <br>
+        <br />
         <div class="flex items-center justify-center w-24 h-24">
-        <img
-          :src="require(`@/assets/roll/${img_choice}.png`)"
-          alt="이미지"
-        />
+          <img :src="require(`@/assets/roll/${img_choice}.png`)" alt="이미지" />
         </div>
       </div>
     </div>
@@ -219,12 +223,12 @@
 
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
 export default {
   name: "App",
   data() {
     return {
-
-      memos: [],  
+      memos: [],
       showFrame1: true,
       showFrame2: false,
       showFrame3: false,
@@ -256,10 +260,8 @@ export default {
     searchName() {},
     memo_text() {},
     img_choice() {},
-    
   },
-  created(){
-  },
+  created() {},
   methods: {
     search() {
       if (this.searchName === "" || this.searchName == null) {
@@ -295,7 +297,7 @@ export default {
           this.searchResult = res.data;
           console.log(this.searchResult);
           if (this.searchResult.length == 0) {
-            alert("검색된 사람이 없습니다!");
+            Swal.fire("알림!", "검색된 사람이 없습니다!", "");
             return;
           } else {
             console.log(this.searchResult);
@@ -303,7 +305,7 @@ export default {
         });
     },
 
-      getrollpaper() {
+    getrollpaper() {
       let obj = {};
       obj.name = this.clickName;
       let url = "http://localhost:3000/getrollpaper";
@@ -341,11 +343,15 @@ export default {
       // 클릭된 이름 저장
       this.clickName = value;
       console.log(this.clickName);
-      alert(this.clickName + "님을 선택했습니다!");
+      Swal.fire({
+        title: this.clickName + "님을 선택했습니다!",
+        icon: "success",
+      });
       this.getrollpaper();
     },
     btn_choice(img) {
-      alert("이모티콘이 선택되었습니다");
+      Swal.fire("알림!", "이모티콘이 선택되었습니다.", "");
+
       console.log(img); // 확인용
       this.img_choice = img;
     },
@@ -450,6 +456,10 @@ export default {
 </script>
 
 <style>
+* {
+  font-family: 국민연금체, 나눔스퀘어라운드, 에스코어 드림;
+}
+
 #app {
   position: relative;
   width: 100vw;
