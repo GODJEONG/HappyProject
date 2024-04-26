@@ -291,9 +291,9 @@
       <!-- End Case Stories -->
 
       <!-- Testimonials -->
-      <div ref="scroll2"></div>
+
       <div class="bg-orange-100/70">
-        <div class="max-w-5xl px-4 xl:px-0 py-10 lg:py-20 mx-auto">
+        <div  ref="scroll2" class="max-w-5xl px-4 xl:px-0 py-10 lg:py-20 mx-auto">
           <!-- Title -->
           <div class="max-w-5xl mb-10 lg:mb-14 pl-8">
             <h2
@@ -672,15 +672,20 @@ export default {
         targetRef = this.$refs.scroll0;
       } else if (position === 1) {
         targetRef = this.$refs.scroll1;
-      } else if (position === 2) {
+      } else 
+      if (position === 2) {
         targetRef = this.$refs.scroll2;
-      } else if (position === 3) {
+      } else
+       if (position === 3) {
         targetRef = this.$refs.scroll3;
       }
 
       // 해당 요소로 스크롤
-      targetRef.scrollIntoView({ behavior: "smooth", block: "start" });
+      targetRef.scrollIntoView({ behavior: "smooth" });
     },
+
+
+    
 
     // 카카오 로그아웃
     async btn_off() {
