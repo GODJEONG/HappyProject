@@ -1,25 +1,25 @@
 <template>
   <!-- <div id="app"> -->
-    <!-- 배경 이미지 -->
-    <img alt="bg_img" src="@/assets/roll/back5.png" class="bg" />
+  <!-- 배경 이미지 -->
+  <img alt="bg_img" src="@/assets/roll/back5.png" class="bg" />
 
-    <!-- 뒤로가기 이미지 버튼 -->
-    <!-- <router-link to="/mainpage" class="decoBack">
+  <!-- 뒤로가기 이미지 버튼 -->
+  <!-- <router-link to="/mainpage" class="decoBack">
       <img src="@/assets/roll/back.png">
     </router-link> -->
 
-    <div>
-      <img
-        @click="gohome()"
-        src="@/assets/home.png"
-        class="max-w-4xl transition-transform duration-300 transform hover:scale-110 absolute right-3 mt-0 mr-8"
-        style="max-width: 70px; z-index: 3"
-      />
-    </div>
+  <div>
+    <img
+      @click="gohome()"
+      src="@/assets/home.png"
+      class="max-w-4xl transition-transform duration-300 transform hover:scale-110 absolute right-3 mt-0 mr-8"
+      style="max-width: 70px; z-index: 3"
+    />
+  </div>
 
-    <!-- 입력 창 -->
+  <!-- 입력 창 -->
 
-    <div class="boxx">
+  <div class="boxx">
     <div class="input-container">
       <div class="input-title">
         <p>내 열차<br />보러가기</p>
@@ -29,7 +29,7 @@
       </div>
     </div>
 
-      <div class="input-container">
+    <div class="input-container">
       <div class="input-content">
         <p>열차<br />꾸며주기</p>
         <router-link to="/roll2" class="decoGo2">
@@ -37,33 +37,34 @@
         </router-link>
       </div>
     </div>
+  </div>
+
+  <img
+    src="@/assets/roll/princess.png"
+    class="princess"
+    style="
+      position: fixed;
+      bottom: 140px;
+      left: 145px;
+      right: 10px;
+      z-index: 9999;
+    "
+  />
+
+  <img
+    src="@/assets/roll/castle.png"
+    class="decoCastle"
+    style="position: fixed; top: 20px; left: 1040px; right: 0px; z-index: 9999"
+  />
+
+  <div class="input-container">
+    <div class="input-content">
+      <p>열차<br />꾸며주기</p>
+      <router-link to="/roll2" class="decoGo2">
+        <img src="@/assets/roll/go.png" />
+      </router-link>
     </div>
-
-    <img
-      src="@/assets/roll/princess.png"
-      class="princess"
-      style="
-        position: fixed;
-        bottom: 140px;
-        left: 145px;
-        right: 10px;
-        z-index: 9999;
-      "
-    />
-
-    <img
-      src="@/assets/roll/castle.png"
-      class="decoCastle"
-      style="
-        position: fixed;
-        top: 20px;
-        left: 1040px;
-        right: 0px;
-        z-index: 9999;
-      "
-    />
-
-  
+  </div>
   <!-- </div> -->
 </template>
 
@@ -83,7 +84,7 @@ export default {
 </script>
 
 <style>
-.boxx {
+#app {
   position: relative;
   width: 100vw;
   height: 100vh;

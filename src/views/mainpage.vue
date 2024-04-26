@@ -373,7 +373,8 @@
                 class="grid grid-cols-1 sm:grid-cols-3 items-center gap-y-20 gap-x-12"
               >
                 <!-- Stats -->
-                <div @click="gogame()"
+                <div
+                  @click="gogame()"
                   class="relative text-center first:before:hidden before:absolute before:-top-full sm:before:top-1/2 before:start-1/2 sm:before:-start-6 before:w-px before:h-20 before:bg-neutral-800 before:rotate-[60deg] sm:before:rotate-12 before:transform sm:before:-translate-y-1/2 before:-translate-x-1/2 sm:before:-translate-x-0 before:mt-3.5 sm:before:mt-0"
                 >
                   <svg
@@ -619,6 +620,7 @@
 <script>
 import axios from "axios";
 import vueCookies from "vue-cookies";
+import Swal from "sweetalert2";
 
 export default {
   name: "App",
@@ -658,7 +660,7 @@ export default {
       console.log(this.token);
     },
 
-     gogame() {
+    gogame() {
       this.$router.push("/CheckGame");
       console.log(this.name);
       console.log(this.login_type);
@@ -698,7 +700,7 @@ export default {
           },
         })
         .then((res) => {
-          alert("성공");
+          Swal.fire("알림!", "로그아웃 되었습니다.", "");
           console.log(res);
           this.$router.push("/");
         });
@@ -712,9 +714,11 @@ export default {
       }
 
       window.Kakao.Auth.logout(function () {
+        Swal.fire("알림!", "로그아웃 되었습니다.", "");
         vueCookies.remove("access-token");
         vueCookies.remove("refresh-token");
         alert("로그아웃 되었습니다.", window.Kakao.Auth.getAccessToken());
+
         this.$router.push("/");
       });
     },
@@ -747,6 +751,7 @@ export default {
           })
           .then((res) => {
             console.log(res);
+            Swal.fire("알림!", "로그아웃 되었습니다.", "");
             this.$store.commit("init");
             this.$router.push("/");
           })

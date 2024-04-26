@@ -37,11 +37,18 @@
             placeholder="상대방 이름 입력"
             style="width: 300px; text-align: center"
           />
-          &nbsp; <button @click="search()">검색</button> <br /><br />
+          &nbsp;
+          <button
+            class="text-xm text-slate-100 bg-red-500/80 rounded-xl drop-shadow-lg"
+            @click="search()"
+          >
+            &nbsp;&nbsp;검색&nbsp;&nbsp;
+          </button>
+          <br /><br />
 
           <!-- 검색 결과를 출력할 부분 -->
           <div v-if="searchResult.length > 0" class="searchBox">
-            <p style="color: hsla(0, 1%, 32%, 0.965)">검색된 이름</p>
+            <p class="text-red-400">검색된 이름</p>
             <br />
             <!-- 데이터베이스에서 일치하는 이름을 출력 -->
             <p
@@ -220,6 +227,7 @@
 
 <script>
 import axios from "axios";
+import Swal from "sweetalert2";
 export default {
   name: "App",
   data() {
@@ -297,7 +305,7 @@ export default {
           this.searchResult = res.data;
           console.log(this.searchResult);
           if (this.searchResult.length == 0) {
-            alert("검색된 사람이 없습니다!");
+            Swal.fire("알림!", "검색된 사람이 없습니다!", "");
             return;
           } else {
             console.log(this.searchResult);
@@ -343,11 +351,15 @@ export default {
       // 클릭된 이름 저장
       this.clickName = value;
       console.log(this.clickName);
-      alert(this.clickName + "님을 선택했습니다!");
+      Swal.fire({
+        title: this.clickName + "님을 선택했습니다!",
+        icon: "success",
+      });
       this.getrollpaper();
     },
     btn_choice(img) {
-      alert("이모티콘이 선택되었습니다");
+      Swal.fire("알림!", "이모티콘이 선택되었습니다.", "");
+
       console.log(img); // 확인용
       this.img_choice = img;
     },
@@ -452,7 +464,7 @@ export default {
 </script>
 
 <style>
-.boxx {
+#app {
   position: relative;
   width: 100vw;
   height: 100vh;

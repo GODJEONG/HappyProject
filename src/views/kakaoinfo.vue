@@ -4,6 +4,7 @@
 import axios from "axios";
 import { getKakaoToken } from "@/views/kakaoLogin.js";
 import vueCookies from "vue-cookies";
+import Swal from "sweetalert2";
 
 export default {
   name: "App",
@@ -28,10 +29,11 @@ export default {
     async setKakaoToken() {
       console.log("카카오 인증 코드", this.$route.query.code);
       this.code = this.$route.query.code;
-      this.value.code= this.code;
+      this.value.code = this.code;
       const { data } = await getKakaoToken(this.$route.query.code);
       if (data.error) {
-        alert("카카오톡 로그인 오류입니다.");
+        Swal.fire("알림!", "카카오톡 로그인 오류입니다.", "");
+
         this.$router.go();
         return;
       }
@@ -39,8 +41,8 @@ export default {
 
       console.log("token: ", data.access_token);
       this.token = data.access_token;
-      this.value.token= this.token;
-      console.log("체크"+ this.value.code, this.value.token);
+      this.value.token = this.token;
+      console.log("체크" + this.value.code, this.value.token);
       this.$store.commit("token", this.value);
       console.log(this.$store.getters.gettoken);
       console.log(this.$store.getters.gettoken.code);
@@ -113,3 +115,8 @@ export default {
   },
 };
 </script>
+<style>
+* {
+  font-family: 국민연금체, 나눔스퀘어라운드, 에스코어 드림;
+}
+</style>
