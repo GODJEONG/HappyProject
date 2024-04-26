@@ -44,7 +44,7 @@
 
           <!-- 검색 결과를 출력할 부분 -->
           <div v-if="searchResult.length > 0" class="searchBox">
-            <p style="color: hsla(0, 1%, 32%, 0.965)">검색된 이름</p>
+            <p class="text-red-400">검색된 이름</p>
             <br />
             <!-- 데이터베이스에서 일치하는 이름을 출력 -->
             <p
