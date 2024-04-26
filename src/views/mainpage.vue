@@ -150,7 +150,7 @@
           <!-- Title -->
           <div class="max-w-5xl mb-10 lg:mb-14 pl-8">
             <h2
-              class="text-white font-semibold text-2xl md:text-4xl md:leading-tight text-rose-900/60"
+              class=" text-green-800/70 font-semibold text-2xl md:text-4xl md:leading-tight "
             >
               Power Contents
             </h2>

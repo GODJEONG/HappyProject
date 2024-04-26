@@ -48,9 +48,8 @@
 
           <!-- 검색 결과를 출력할 부분 -->
           <div v-if="searchResult.length > 0" class="searchBox">
-            <p class="text-red-400">검색된 이름</p>
-            <br />
-            <!-- 데이터베이스에서 일치하는 이름을 출력 -->
+            <!-- <p class="text-red-400">검색된 이름</p> -->
+               <!-- 데이터베이스에서 일치하는 이름을 출력 -->
             <p
               v-for="result in searchResult"
               style="color: hsla(0, 1%, 32%, 0.965); cursor: pointer"
@@ -214,7 +213,7 @@
       <div class="memo memo-content">
         <br /><br /><br />
         To {{ clickName }} <br />
-        메시지<br />
+          <br />
         {{ memo_text }}
         <br />
         <div class="flex items-center justify-center w-24 h-24">
