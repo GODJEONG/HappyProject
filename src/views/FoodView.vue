@@ -347,15 +347,15 @@ export default {
 
         let list = {};
         list[this.restaurantList[0].name] = this.restaurantList[0].likeCount;
-        list[this.restaurantList[1].name]  = this.restaurantList[1].likeCount;
-        list[this.restaurantList[2].name]  = this.restaurantList[2].likeCount;
-        list[this.restaurantList[3].name]  = this.restaurantList[3].likeCount;
-        list[this.restaurantList[4].name]  = this.restaurantList[4].likeCount;
-        list[this.restaurantList[5].name]  = this.restaurantList[5].likeCount;
-        list[this.restaurantList[6].name]  = this.restaurantList[6].likeCount;
-        list[this.restaurantList[7].name]  = this.restaurantList[7].likeCount;
-        list[this.restaurantList[8].name]  = this.restaurantList[8].likeCount;
-        list[this.restaurantList[9].name]  = this.restaurantList[9].likeCount;
+        list[this.restaurantList[1].name] = this.restaurantList[1].likeCount;
+        list[this.restaurantList[2].name] = this.restaurantList[2].likeCount;
+        list[this.restaurantList[3].name] = this.restaurantList[3].likeCount;
+        list[this.restaurantList[4].name] = this.restaurantList[4].likeCount;
+        list[this.restaurantList[5].name] = this.restaurantList[5].likeCount;
+        list[this.restaurantList[6].name] = this.restaurantList[6].likeCount;
+        list[this.restaurantList[7].name] = this.restaurantList[7].likeCount;
+        list[this.restaurantList[8].name] = this.restaurantList[8].likeCount;
+        list[this.restaurantList[9].name] = this.restaurantList[9].likeCount;
 
         console.log(list);
 
@@ -364,7 +364,7 @@ export default {
           '    <div class="info">' +
           '        <div class="title ">' +
           "            비트컴퓨터 <br>" +
-          "DIGI 캠퍼스 <br>" + 
+          "DIGI 캠퍼스 <br>" +
           '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
           "        </div>" +
           '        <div class="body flex items-center justify-center">' +
@@ -381,7 +381,8 @@ export default {
           '    <div class="info">' +
           '        <div class="title ">' +
           "            쿠차라 <br>" +
-          "페이코 / 좋아요: "  + list['쿠차라'] + 
+          "페이코 / 좋아요: " +
+          list["쿠차라"] +
           '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
           "        </div>" +
           '        <div class="body flex items-center justify-center">' +
@@ -398,7 +399,8 @@ export default {
           '    <div class="info">' +
           '        <div class="title ">' +
           "            담소소사골순대육개장 <br>" +
-          " 페이코 / 좋아요: "  + list['담소소사골순대육개장'] + 
+          " 페이코 / 좋아요: " +
+          list["담소소사골순대육개장"] +
           '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
           "        </div>" +
           '        <div class="body flex items-center justify-center">' +
@@ -415,7 +417,8 @@ export default {
           '    <div class="info">' +
           '        <div class="title ">' +
           "           오제제 <br>" +
-          " 좋아요: "  + list['오제제'] + 
+          " 좋아요: " +
+          list["오제제"] +
           '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
           "        </div>" +
           '        <div class="body flex items-center justify-center">' +
@@ -432,7 +435,8 @@ export default {
           '    <div class="info">' +
           '        <div class="title ">' +
           "           오토김밥 <br>" +
-          " 좋아요: "  + list['오토김밥'] + 
+          " 좋아요: " +
+          list["오토김밥"] +
           '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
           "        </div>" +
           '        <div class="body flex items-center justify-center">' +
@@ -449,7 +453,8 @@ export default {
           '    <div class="info">' +
           '        <div class="title ">' +
           "           야기카레 <br>" +
-          "페이코 / 좋아요: "  + list['야기카레'] + 
+          "페이코 / 좋아요: " +
+          list["야기카레"] +
           '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
           "        </div>" +
           '        <div class="body flex items-center justify-center">' +
@@ -466,7 +471,8 @@ export default {
           '    <div class="info">' +
           '        <div class="title ">' +
           "           을밀대 <br>" +
-          " 좋아요: "  + list['을밀대'] + 
+          " 좋아요: " +
+          list["을밀대"] +
           '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
           "        </div>" +
           '        <div class="body flex items-center justify-center">' +
@@ -483,7 +489,8 @@ export default {
           '    <div class="info">' +
           '        <div class="title ">' +
           "            달래해장<br>" +
-          " 좋아요: "  + list['달래해장'] + 
+          " 좋아요: " +
+          list["달래해장"] +
           '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
           "        </div>" +
           '        <div class="body flex items-center justify-center">' +
@@ -500,7 +507,8 @@ export default {
           '    <div class="info">' +
           '        <div class="title ">' +
           "            농민백암순대<br>" +
-          " 좋아요: "  + list['농민백암순대'] + 
+          " 좋아요: " +
+          list["농민백암순대"] +
           '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
           "        </div>" +
           '        <div class="body flex items-center justify-center">' +
@@ -517,7 +525,8 @@ export default {
           '    <div class="info">' +
           '        <div class="title ">' +
           "            우동명가기리야마본진<br>" +
-          " 페이코 / 좋아요: "  + list['우동명가기리야마본진'] + 
+          " 페이코 / 좋아요: " +
+          list["우동명가기리야마본진"] +
           '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
           "        </div>" +
           '        <div class="body flex items-center justify-center">' +
@@ -534,7 +543,8 @@ export default {
           '    <div class="info">' +
           '        <div class="title ">' +
           "            한율막국수<br>" +
-          " 페이코 / 좋아요: "  + list['한율막국수'] +
+          " 페이코 / 좋아요: " +
+          list["한율막국수"] +
           '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
           "        </div>" +
           '        <div class="body flex items-center justify-center">' +

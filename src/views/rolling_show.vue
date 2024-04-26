@@ -7,8 +7,8 @@
   <!-- <router-link to="/roll1" class="decoBack">
     <img src="@/assets/roll/back.png" />
   </router-link> -->
-  
- <div class="relative">
+
+  <div class="relative">
     <img
       @click="gohome()"
       src="@/assets/home.png"
@@ -17,69 +17,105 @@
     />
   </div>
 
-<div class="total">
-  <div class="content">
-    <div class="title">{{ name }} 님에게</div>
-    <div class="title">도착한 메세지!</div>
+  <div class="total">
+    <div class="content">
+      <div class="title">{{ name }} 님에게</div>
+      <div class="title">도착한 메세지!</div>
+    </div>
+
+    <img alt="main_img" src="@/assets/roll/train.png" class="train" />
+
+    <div v-if="showImg">
+      <div
+        @click="showMemo('deco1')"
+        v-if="deco1_status"
+        style="cursor: pointer"
+      >
+        <img src="@/assets/roll/deco1.png" class="ribbon moving" />
+        <!--리본-->
+      </div>
+
+      <div
+        @click="showMemo('deco2')"
+        v-if="deco2_status"
+        style="cursor: pointer"
+      >
+        <img src="@/assets/roll/deco2.png" class="party moving" />
+        <!--폭죽-->
+      </div>
+
+      <div
+        @click="showMemo('deco6')"
+        v-if="deco6_status"
+        style="cursor: pointer"
+      >
+        <img src="@/assets/roll/deco6.png" class="party2 moving" />
+        <!--하트-->
+      </div>
+
+      <div
+        @click="showMemo('deco5')"
+        v-if="deco5_status"
+        style="cursor: pointer"
+      >
+        <img src="@/assets/roll/deco5.png" class="msg moving" />
+        <!--메세지-->
+      </div>
+
+      <div
+        @click="showMemo('deco3')"
+        v-if="deco3_status"
+        style="cursor: pointer"
+      >
+        <img src="@/assets/roll/deco3.png" class="headband moving" />
+        <!--머리띠-->
+      </div>
+
+      <div
+        @click="showMemo('deco4')"
+        v-if="deco4_status"
+        style="cursor: pointer"
+      >
+        <img src="@/assets/roll/deco4.png" class="cake moving" />
+        <!--케이크-->
+      </div>
+
+      <div
+        @click="showMemo('deco8')"
+        v-if="deco8_status"
+        style="cursor: pointer"
+      >
+        <img src="@/assets/roll/deco8.png" class="sunglasses moving" />
+        <!--선글라스-->
+      </div>
+
+      <div
+        @click="showMemo('deco7')"
+        v-if="deco7_status"
+        style="cursor: pointer"
+      >
+        <img src="@/assets/roll/deco7.png" class="dog moving" />
+        <!--강아지-->
+      </div>
+
+      <div
+        @click="showMemo('deco9')"
+        v-if="deco9_status"
+        style="cursor: pointer"
+      >
+        <img src="@/assets/roll/deco9.png" class="present moving" />
+        <!--선물-->
+      </div>
+    </div>
+
+    <!-- 메모내용 팝업창 -->
+    <div v-if="isPopupVisible" class="popup">
+      <div>
+        {{ currentMemo }} <br /><br />
+        <button class="popupButton" @click="closeMemo">닫기</button>
+      </div>
+    </div>
   </div>
-
-  <img alt="main_img" src="@/assets/roll/train.png" class="train" />
-
-  <div v-if="showImg">
-    <div @click="showMemo('deco1')" v-if="deco1_status" style="cursor: pointer">
-      <img src="@/assets/roll/deco1.png" class="ribbon moving" />
-      <!--리본-->
-    </div>
-
-    <div @click="showMemo('deco2')" v-if="deco2_status" style="cursor: pointer">
-      <img src="@/assets/roll/deco2.png" class="party moving" />
-      <!--폭죽-->
-    </div>
-
-    <div @click="showMemo('deco6')" v-if="deco6_status" style="cursor: pointer">
-      <img src="@/assets/roll/deco6.png" class="party2 moving" />
-      <!--하트-->
-    </div>
-
-    <div @click="showMemo('deco5')" v-if="deco5_status" style="cursor: pointer">
-      <img src="@/assets/roll/deco5.png" class="msg moving" />
-      <!--메세지-->
-    </div>
-
-    <div @click="showMemo('deco3')" v-if="deco3_status" style="cursor: pointer">
-      <img src="@/assets/roll/deco3.png" class="headband moving" />
-      <!--머리띠-->
-    </div>
-
-    <div @click="showMemo('deco4')" v-if="deco4_status" style="cursor: pointer">
-      <img src="@/assets/roll/deco4.png" class="cake moving" />
-      <!--케이크-->
-    </div>
-
-    <div @click="showMemo('deco8')" v-if="deco8_status" style="cursor: pointer">
-      <img src="@/assets/roll/deco8.png" class="sunglasses moving" />
-      <!--선글라스-->
-    </div>
-
-    <div @click="showMemo('deco7')" v-if="deco7_status" style="cursor: pointer">
-      <img src="@/assets/roll/deco7.png" class="dog moving" />
-      <!--강아지-->
-    </div>
-
-    <div @click="showMemo('deco9')" v-if="deco9_status" style="cursor: pointer">
-      <img src="@/assets/roll/deco9.png" class="present moving" />
-      <!--선물-->
-    </div>
-  </div>
-
-  <!-- 메모내용 팝업창 -->
-  <div v-if="isPopupVisible" class="popup">
-    <div>
-      {{ currentMemo }} <br /><br />
-      <button class="popupButton" @click="closeMemo">닫기</button>
-    </div>
-  </div>
-</div>
 </template>
 
 <script>
@@ -124,7 +160,7 @@ export default {
       console.log("showmemo");
       for (let i = 0; i < this.memos.length; i++) {
         console.log(this.memos[i].img);
-        console.log('key' + key);
+        console.log("key" + key);
         if (this.memos[i].img == key) {
           console.log(this.memos[i]);
           console.log(this.memos[i].contents);
@@ -184,9 +220,10 @@ export default {
 };
 </script>
 
-
 <style>
-
+* {
+  font-family: 국민연금체, 나눔스퀘어라운드, 에스코어 드림;
+}
 .total {
   position: relative;
   width: 100vw;

@@ -45,6 +45,9 @@ export default {
 };
 </script>
 <style>
+* {
+  font-family: 국민연금체, 나눔스퀘어라운드, 에스코어 드림;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

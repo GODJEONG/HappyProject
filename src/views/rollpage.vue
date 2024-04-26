@@ -127,15 +127,15 @@ export default {
     },
 
     slacksend() {
-        let obj = {};
-      obj.name=this.name;
+      let obj = {};
+      obj.name = this.name;
       let url = "http://localhost:3000/rollslack";
-           axios
+      axios
         .get(url, {
           params: obj,
         })
         .then((res) => {
-          console.log("slack complete"+ res);
+          console.log("slack complete" + res);
         });
     },
 
@@ -229,13 +229,14 @@ export default {
         icon: "success",
       });
     },
-
-
   },
 };
 </script>
 
 <style>
+* {
+  font-family: 국민연금체, 나눔스퀘어라운드, 에스코어 드림;
+}
 #drag-container {
   width: 400px;
   height: 400px;
